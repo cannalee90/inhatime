@@ -1,0 +1,10 @@
+/node_modules/*
+/node_modules/**/*
+/public/*
+/public/**/*
+/vender/*
+/vender/**/*
+/**/vender/*
+/**/vender/**/*
+/src/**/*
+/src/*

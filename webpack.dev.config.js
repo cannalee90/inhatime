@@ -7,9 +7,9 @@ module.exports = {
     'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
-    `${__dirname}/frontend/react/index.js`,
+    `${__dirname}/frontend/react/index.jsx`,
   ],
-  devtool: "inline-source-map",
+  devtool: 'inline-source-map',
   output: {
     path: `${__dirname}/src`,
     publicPath: '/assets/',
@@ -24,13 +24,14 @@ module.exports = {
   devServer: {
     compress: false,
     port: 8080,
-    publicPath: "/assets/",
+    publicPath: '/assets/',
     contentBase: path.join(__dirname, 'frontend'),
     hot: true,
 
   },
   resolve: {
     modules: ['node_modules'],
+    extensions: ['.js', '.jsx'],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -71,7 +72,7 @@ module.exports = {
             options: {
               plugins() {
                 return [
-                  require('autoprefixer')({ browsers: ['last 2 versions'] }),
+                  autoprefixer({browsers: ['last 2 versions']}),
                 ];
               },
             },
@@ -92,7 +93,7 @@ module.exports = {
             options: {
               plugins() {
                 return [
-                  require('autoprefixer')({ browsers: ['last 2 versions'] }),
+                  autoprefixer({browsers: ['last 2 versions']}),
                 ];
               },
             },
