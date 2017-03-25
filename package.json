@@ -1,0 +1,34 @@
+{
+  "name": "inhatime",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "./node_modules/webpack/bin/webpack.js --watch --config webpack.dev.config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^6.7.7",
+    "babel": "^6.23.0",
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "bluebird": "^3.5.0",
+    "lodash": "^4.17.4",
+    "node-sass": "^4.5.1",
+    "postcss-loader": "^1.3.3",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.3",
+    "redux": "^3.6.0",
+    "style-loader": "^0.16.0",
+    "webpack": "^2.3.2",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-1": "^6.16.0"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^2.4.2"
+  }
+}
