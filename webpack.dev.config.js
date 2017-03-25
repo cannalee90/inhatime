@@ -3,9 +3,12 @@ const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 
 module.exports = {
-  entry: {
-    bundle: `${__dirname}/frontend/react/index.js`,
-  },
+  entry: [
+    'react-hot-loader/patch',
+    'webpack-dev-server/client?http://localhost:8080',
+    'webpack/hot/only-dev-server',
+    `${__dirname}/frontend/react/index.js`,
+  ],
   devtool: "inline-source-map",
   output: {
     path: `${__dirname}/src`,
@@ -23,10 +26,16 @@ module.exports = {
     port: 8080,
     publicPath: "/assets/",
     contentBase: path.join(__dirname, 'frontend'),
+    hot: true,
+
   },
   resolve: {
     modules: ['node_modules'],
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
+  ],
   module: {
     rules: [
       {
@@ -40,7 +49,6 @@ module.exports = {
         use: [
           {
             loader: 'babel-loader',
-            options: { presets: ['react', 'es2015', 'stage-1'] },
           },
         ],
       },
