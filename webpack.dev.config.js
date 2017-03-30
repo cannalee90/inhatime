@@ -32,6 +32,8 @@ module.exports = {
     modules: ['node_modules'],
     alias: {
       Components: path.resolve(__dirname, 'frontend/react/components'),
+      Actions: path.resolve(__dirname, 'frontend/react/actions'),
+      Contestants: path.resolve(__dirname, 'frontend/react/contestants'),
     },
     extensions: ['.js', '.jsx'],
   },
