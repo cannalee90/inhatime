@@ -1,13 +1,11 @@
-/* eslint-disable global-require */
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './../reducers';
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
-
-export default (initialState = {}) => {
-  const store = createStoreWithMiddleware(
+export default (initialState = {}, { reactRouterMiddleware }) => {
+  const store = createStore(
     reducers,
     initialState,
+    applyMiddleware(reactRouterMiddleware),
   );
   return store;
 };

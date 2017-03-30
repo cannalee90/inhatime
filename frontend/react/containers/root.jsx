@@ -1,11 +1,18 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import DefaultContainr from './app-container';
-// import store from './../store';
+import { Route, Router, IndexRoute } from 'react-router';
 
-export default ({ store }) =>
-  <Provider store={store}>
-    <div>
-      <DefaultContainr />
-    </div>
-  </Provider>;
+import CounterComponent from './../containers/counter-containers';
+
+export default ({ store, history }) => {
+  return (
+    <Provider store={store}>
+      <Router history={history}>
+        <Route path='/' >
+          <IndexRoute component={CounterComponent} />
+          <Route path='about' component={CounterComponent2} />
+        </Route>
+      </Router>
+    </Provider>
+  );
+};
