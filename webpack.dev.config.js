@@ -27,10 +27,12 @@ module.exports = {
     publicPath: '/assets/',
     contentBase: path.join(__dirname, 'frontend'),
     hot: true,
-
   },
   resolve: {
     modules: ['node_modules'],
+    alias: {
+      Components: path.resolve(__dirname, 'frontend/react/components'),
+    },
     extensions: ['.js', '.jsx'],
   },
   plugins: [
@@ -72,7 +74,7 @@ module.exports = {
             options: {
               plugins() {
                 return [
-                  autoprefixer({browsers: ['last 2 versions']}),
+                  autoprefixer({ browsers: ['last 2 versions'] }),
                 ];
               },
             },
@@ -93,7 +95,7 @@ module.exports = {
             options: {
               plugins() {
                 return [
-                  autoprefixer({browsers: ['last 2 versions']}),
+                  autoprefixer({ browsers: ['last 2 versions'] }),
                 ];
               },
             },

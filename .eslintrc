@@ -1,13 +1,54 @@
 {
-  "extends": [
-    "naver",
-    "standard-react",
-  ],
-  "plugins": [
-    "react"
-  ],
-  "rules": {
-    "quotes": ["error", "single", { "avoidEscape": true }],
-    "indent": ["error", 2],
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "mocha": true
   },
+  "globals": {
+    "UPLOADCARE_PUBLIC_KEY": true,
+    "CKEDITOR": true
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.dev.config.js"
+      }
+    }
+  },
+  "plugins": ["react"],
+  "rules": {
+    "arrow-body-style": [0, "as-needed"],
+    "radix": [2, "as-needed"],
+    "no-console": [2, { allow: ["warn", "error", "log"] }],
+    "global-require": [1],
+    "class-methods-use-this": 0,
+    "no-useless-constructor": 1,
+    "no-param-reassign": ["error", { "props": false }],
+    "no-unused-vars": [1, { "vars": "all", "args": "none" }],
+    "no-class-assign": [0],
+    "no-unused-expressions": [0],
+    "max-len": [0],
+    "no-underscore-dangle": [0],
+    "dot-notation": [1],
+    "no-undef": [1],
+    "jsx-quotes": [2, "prefer-single"],
+    "jsx-a11y/href-no-hash": 0,
+    "jsx-a11y/label-has-for": 1,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "react/forbid-prop-types": [1, { "forbid": [] }],
+    "react/jsx-closing-bracket-location": 1,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/prefer-stateless-function": [0],
+    "react/prop-types": [1],
+    "no-global-assign": [1, {"exceptions": ["UPLOADCARE_PUBLIC_KEY"]}],
+    "import/no-dynamic-require": [1],
+    "import/no-mutable-exports": [1],
+    "import/no-extraneous-dependencies": [0],
+    "import/extensions": [2, { "js": "never" }],
+    "import/no-unresolved": [1, {commonjs: true}],
+    "import/prefer-default-export": [0],
+  }
 }
