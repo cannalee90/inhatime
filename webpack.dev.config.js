@@ -26,6 +26,7 @@ module.exports = {
     port: 8080,
     publicPath: '/assets/',
     contentBase: path.join(__dirname, 'frontend'),
+    historyApiFallback: true,
     hot: true,
   },
   resolve: {
