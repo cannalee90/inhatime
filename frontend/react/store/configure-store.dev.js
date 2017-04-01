@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import reducers from './../reducers';
 import DevTools from './../containers/dev-tools';
 
@@ -6,8 +6,10 @@ export default (initialState = {}, { reactRouterMiddleware }) => {
   const store = createStore(
     reducers,
     initialState,
-    DevTools.instrument(),
-    applyMiddleware(reactRouterMiddleware),
+    compose(
+      applyMiddleware(reactRouterMiddleware),
+      DevTools.instrument(),
+    ),
   );
   return store;
 };
