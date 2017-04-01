@@ -1,11 +1,5 @@
-import { createStore, applyMiddleware } from 'redux';
-import reducers from './../reducers';
-
-export default (initialState = {}, { reactRouterMiddleware }) => {
-  const store = createStore(
-    reducers,
-    initialState,
-    applyMiddleware(reactRouterMiddleware),
-  );
-  return store;
+if (process.env.NODE_ENV === 'production') {
+  module.exports = require('./configure-store.prod');
+} else {
+  module.exports = require('./configure-store.dev');
 };
