@@ -2,10 +2,10 @@ import React from 'react';
 
 import { Route, IndexRoute } from 'react-router';
 
-import CounterComponent from './containers/counter-containers';
+import App from './containers/app';
 
 export default (
   <Route path='/' >
-    <IndexRoute component={CounterComponent} />
+    <IndexRoute component={App} />
   </Route>
 );
