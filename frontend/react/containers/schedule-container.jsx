@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import TableInfo from './../components/table-info';
+import TableInfo from '../components/table-info';
+import Timetable from './../components/timetable';
 
 class ScheduleContainer extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class ScheduleContainer extends Component {
     return (
       <div className='row' style={{ marginTop: '50px' }} >
         <TableInfo />
+        <Timetable />
       </div>
     );
   }
