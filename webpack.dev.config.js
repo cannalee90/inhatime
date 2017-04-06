@@ -63,7 +63,7 @@ module.exports = {
         exclude: [
           /style\.css$/,
           /font-awesome\.css$/,
-          /redactor\.min\.css$/,
+          /bootstrap\.css$/,
         ],
         use: [
           {
@@ -84,6 +84,32 @@ module.exports = {
           },
         ],
       },
+      {
+        test: [
+          /style\.css$/,
+          /font-awesome\.css$/,
+          /bootstrap\.css$/,
+        ],
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins() {
+                return [
+                  autoprefixer({ browsers: ['last 2 versions'] }),
+                ];
+              },
+            },
+          },
+        ],
+      },
+
       {
         test: /\.scss$/,
         use: [
