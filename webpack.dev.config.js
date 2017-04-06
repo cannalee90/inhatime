@@ -26,12 +26,15 @@ module.exports = {
     port: 8080,
     publicPath: '/assets/',
     contentBase: path.join(__dirname, 'frontend'),
+    historyApiFallback: true,
     hot: true,
   },
   resolve: {
     modules: ['node_modules'],
     alias: {
       Components: path.resolve(__dirname, 'frontend/react/components'),
+      Actions: path.resolve(__dirname, 'frontend/react/actions'),
+      Contestants: path.resolve(__dirname, 'frontend/react/contestants'),
     },
     extensions: ['.js', '.jsx'],
   },
@@ -60,7 +63,7 @@ module.exports = {
         exclude: [
           /style\.css$/,
           /font-awesome\.css$/,
-          /redactor\.min\.css$/,
+          /bootstrap\.css$/,
         ],
         use: [
           {
@@ -81,6 +84,32 @@ module.exports = {
           },
         ],
       },
+      {
+        test: [
+          /style\.css$/,
+          /font-awesome\.css$/,
+          /bootstrap\.css$/,
+        ],
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins() {
+                return [
+                  autoprefixer({ browsers: ['last 2 versions'] }),
+                ];
+              },
+            },
+          },
+        ],
+      },
+
       {
         test: /\.scss$/,
         use: [
