@@ -117,7 +117,7 @@ module.exports = {
             loader: 'style-loader',
           },
           {
-            loader: 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]',
+            loader: 'css-loader',
           },
           {
             loader: 'postcss-loader',
