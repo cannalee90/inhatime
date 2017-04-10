@@ -21,7 +21,7 @@ Btn.defaultProps = {
 
 Btn.propTypes = {
   className: React.PropTypes.string,
-  onClick: React.PropTypes.func.isRequired,
+  onClick: React.PropTypes.func,
   type: React.PropTypes.string,
   value: React.PropTypes.string,
 };
