@@ -148,15 +148,6 @@ a:activated {
   text-align:center;
 }
 
-.search-text {
-  width:100%;
-  border:none;
-  padding:5px;
-}
-
-.search-text {
-  background: #fff;
-}
 
 
 .table-wrap {
@@ -484,17 +475,6 @@ a:activated {
   text-align:center;
 }
 
-.search-text {
-  width:100%;
-  border:none;
-  padding:5px;
-}
-
-.search-text {
-  background: #fff;
-}
-
-
 .table-wrap {
   width:100%;
   height:40vh;
@@ -688,3 +668,4 @@ a:activated {
     padding-top: 0px;
   }
 }
+
