@@ -8,6 +8,11 @@
   flex-basis: 100px;
 }
 
+.btn-drop > a {
+  display: block;
+  text-decoration: none;
+}
+
 .search-text {
   flex-grow: 1;
   border:none;
