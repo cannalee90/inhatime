@@ -8,8 +8,9 @@
   flex-basis: 100px;
 }
 
-.btn-drop > a {
+.btn-drop > span {
   display: block;
+  color: #000;
   text-decoration: none;
 }
 
@@ -23,7 +24,10 @@
 
 .searchFromContainer {
   display: flex;
-  & > #serach-filter {
+  #search-filter {
+    margin-right: 4px;
+  }
+  .search-text {
     margin-right: 4px;
   }
 }
