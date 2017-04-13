@@ -302,7 +302,7 @@ a:activated {
 
 /* drop down btns */
 .btn-drop {
-  display: none;
+  /*display: none;*/
   position: absolute;
   text-align: center;
   max-width: auto;
@@ -316,6 +316,7 @@ a:activated {
 .btn-drop a, form {
   color: #000;
 }
+
 .btn-drop a:hover {
   color: var(--oc-cyan-3);
 }
@@ -627,7 +628,7 @@ a:activated {
 
 /* drop down btns */
 .btn-drop {
-  display: none;
+  /*display: none;*/
   position: absolute;
   text-align: center;
   max-width: auto;
@@ -668,4 +669,3 @@ a:activated {
     padding-top: 0px;
   }
 }
-

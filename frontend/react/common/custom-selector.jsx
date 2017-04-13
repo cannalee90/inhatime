@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 export default class CustomSelector extends Component {
   constructor(props) {
@@ -69,14 +70,16 @@ export default class CustomSelector extends Component {
   }
 
   menuClose() {
-    const selectBox = ReactDOM.findDOMNode(this.selectBox);
-    selectBox.style.display = 'none';
+    // const selectBox = ReactDOM.findDOMNode(this.selectBox);
+    // selectBox.classList.add('selectFadeOut');
+    // selectBox.classList.remove('selectFadeIn');
     this.setState({ isOpen: false });
   }
 
   menuOpen() {
-    const selectBox = ReactDOM.findDOMNode(this.selectBox);
-    selectBox.style.display = 'block';
+    // const selectBox = ReactDOM.findDOMNode(this.selectBox);
+    // selectBox.classList.add('selectFadeIn');
+    // selectBox.classList.remove('selectFadeOut');
     this.setState({ isOpen: true });
   }
 
@@ -88,10 +91,17 @@ export default class CustomSelector extends Component {
   }
 
   renderOptions(options) {
-    return options.map((option) => {
-      const { value, label } = option;
-      return <span href='#' key={value} className='option-select' onClick={(e) => { this.changeSelected(option); }}>{label}</span>;
-    });
+    if (this.state.isOpen) {
+      return (
+        <div id='serach-filter-drop' className='btn-middle btn-drop' ref={(target) => { this.selectBox = target; }}>
+          {options.map((option) => {
+            const { value, label } = option;
+            return <span href='#' key={value} className='option-select' onClick={(e) => { this.changeSelected(option); }}>{label}</span>;
+          })}
+        </div>
+      );
+    }
+    return null;
   }
 
   render() {
@@ -100,9 +110,12 @@ export default class CustomSelector extends Component {
       <div className='inline-block btn-middle' id='search-filter' ref={(target) => { this.wrapper = target; }} onClick={e => this.toggleSelect(e)}>
         {this.state.selected.label}
         {this.renderArrow()}
-        <div id='serach-filter-drop' className='btn-middle btn-drop' ref={(target) => { this.selectBox = target; }}>
+        <CSSTransitionGroup
+          transitionName='selectmenu'
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}>
           {this.renderOptions(options)}
-        </div>
+        </CSSTransitionGroup>
       </div>
     );
   }
