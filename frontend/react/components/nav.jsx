@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { userSignout } from './../actions/session';
 import LinkTo from './../common/link-to';
+
 
 class Nav extends Component {
   constructor(props) {
@@ -39,7 +44,7 @@ class Nav extends Component {
               }
               {isAuth &&
                 <li>
-                  <a href='#'>로그아웃</a>
+                  <a href='#' onClick={() => this.props.userSignout()}>로그아웃</a>
                 </li>
               }
               {!isAuth &&
@@ -58,4 +63,14 @@ class Nav extends Component {
   }
 };
 
-export default Nav;
+const mapStateToProps = ({ session }) => {
+  return {
+    session,
+  };
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ userSignout }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nav);

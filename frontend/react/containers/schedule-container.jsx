@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import CourseSearch from './../components/course-search';
-import CourseDetail from './../components/course-detail';
 import Timetable from './../components/timetable';
 
 class ScheduleContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
     return (

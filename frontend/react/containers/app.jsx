@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+// import { connect } from 'react-redux';
+// import { bindActionCreators } from 'redux';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -15,11 +15,9 @@ class App extends Component {
   }
 
   render() {
-    const { session } = this.props;
     return (
       <div>
         <Nav
-          session={session}
         />
         <div style={{ paddingTop: '50px' }}>
           {this.props.children}
@@ -29,15 +27,15 @@ class App extends Component {
     );
   }
 }
-
-const mapStateToProps = ({ session }) => {
-  return {
-    session,
-  };
-};
+//
+// const mapStateToProps = ({ session }) => {
+//   return {
+//     session,
+//   };
+// };
 
 // const mapDispatchToProps = (dispatch) => {
 //   return bindActionCreators({}, dispatch);
 // };
 
-export default connect(mapStateToProps, null)(App)
+export default App;
