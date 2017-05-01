@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -7,15 +9,18 @@ import Footer from './../components/footer';
 import './../styles/style.css';
 import './../styles/custom.scss';
 
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
+    const { session } = this.props;
     return (
       <div>
-        <Nav />
+        <Nav
+          session={session}
+        />
         <div style={{ paddingTop: '50px' }}>
           {this.props.children}
         </div>
@@ -24,3 +29,15 @@ export default class App extends Component {
     );
   }
 }
+
+const mapStateToProps = ({ session }) => {
+  return {
+    session,
+  };
+};
+
+// const mapDispatchToProps = (dispatch) => {
+//   return bindActionCreators({}, dispatch);
+// };
+
+export default connect(mapStateToProps, null)(App)

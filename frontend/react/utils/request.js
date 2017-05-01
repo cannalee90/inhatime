@@ -2,7 +2,7 @@ import axios from 'axios';
 import config from './../../config';
 
 axios.defaults.baseURL = config.baseurl;
-axios.defaults.headers.common.Authorization = localStorage.getItem('sundayCodingAuthToken') ? `Bearer ${localStorage.getItem('sundayCodingAuthToken')}` : null;
+axios.defaults.headers.common.Authorization = localStorage.getItem('sundayCodingAuthToken') ? `Bearer ${localStorage.getItem('inhatimeAuthToken')}` : null;
 axios.defaults.headers.common.Accept = 'application/json';
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 
