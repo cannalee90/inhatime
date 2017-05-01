@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
 import reducers from './../reducers';
 import DevTools from '../containers/dev-tools';
 
@@ -7,7 +8,7 @@ export default (initialState = {}, { reactRouterMiddleware }) => {
     reducers,
     initialState,
     compose(
-      applyMiddleware(reactRouterMiddleware),
+      applyMiddleware(reactRouterMiddleware, thunk),
       DevTools.instrument(),
     ),
   );

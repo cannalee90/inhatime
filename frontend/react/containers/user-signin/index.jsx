@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCeators } from 'redux';
+import { bindActionCreators } from 'redux';
 import UserSigninForm from './user-signin-form';
+import { userSignin } from './../../actions/session';
 
 class UserSignin extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class UserSignin extends Component {
   }
 
   onSubmit(values) {
-    console.log(values);
+    this.props.userSignin(values);
   }
 
   render() {
@@ -24,4 +25,15 @@ class UserSignin extends Component {
   }
 }
 
-export default connect()(UserSignin);
+const mapStateToProps = () => {
+  return {
+
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ userSignin }, dispatch);
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserSignin);
