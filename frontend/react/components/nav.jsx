@@ -1,4 +1,5 @@
 import React from 'react';
+import LinkTo from './../common/link-to';
 
 export default (props) => {
   return (
@@ -7,11 +8,15 @@ export default (props) => {
         <div className='navbar-header'>
           <button type='button' className='navbar-toggle collapsed' data-toggle='collapse' data-target='#navbar' aria-expanded='false' aria-controls='navbar'>
             <span className='sr-only'>Toggle navigation</span>
-            <span className='icon-bar'></span>
-            <span className='icon-bar'></span>
-            <span className='icon-bar'></span>
+            <span className='icon-bar' />
+            <span className='icon-bar' />
+            <span className='icon-bar' />
           </button>
-          <a className='navbar-brand' href='#'>time table</a>
+          <LinkTo
+            className='navbar-brand'
+            to='/'
+            message='time table'
+          />
         </div>
         <div id='navbar' className='navbar-collapse collapse'>
           <ul className='nav navbar-nav navbar-right'>

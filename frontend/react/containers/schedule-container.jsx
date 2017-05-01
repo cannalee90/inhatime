@@ -10,10 +10,9 @@ class ScheduleContainer extends Component {
 
   render() {
     return (
-      <div className='row' style={{ marginTop: '50px' }} >
+      <div className='row' >
         <div className='col-xs-12 col-md-6 box-padding' id='part-lecture'>
           <CourseSearch />
-          <CourseDetail />
         </div>
         <div className='col-xs-12 col-md-6 box-padding' id='part-timetable'>
           <Timetable />

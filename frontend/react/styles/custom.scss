@@ -32,24 +32,6 @@
   }
 }
 
-@keyframes showSelect {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes hideSelect {
-   0% {
-     opacity: 1;
-   }
-   100% {
-     opacity: 0;
-   }
-}
-
 .selectFadeIn {
   display: block;
 }
