@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const renderField = ({ errorRender, disabled, input, label, type, placeholder, meta: { touched, error, warning } }) => {
-  if (label) {
+  if (label || label.length === 0) {
     <div className={`form-group ${(error && touched) ? 'has-error' : null}`}>
       <label className='col-sm-2 control-label' htmlFor={input.name}>{label}</label>
       <div className='col-sm-10'>
@@ -35,14 +35,15 @@ renderField.defaultProps = {
   errorRender: true,
   disabled: false,
   type: 'text',
+  label: '',
 };
 
 renderField.propTypes = {
   errorRender: PropTypes.bool,
   disabled: PropTypes.bool,
   type: PropTypes.string,
+  label: PropTypes.string,
   input: PropTypes.object.isRequired,
-  label: PropTypes.string.isRequired,
   meta: PropTypes.object.isRequired,
 };
 

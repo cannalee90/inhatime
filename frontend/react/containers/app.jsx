@@ -8,6 +8,7 @@ import Nav from './../components/nav';
 import Footer from './../components/footer';
 import './../styles/style.css';
 import './../styles/custom.scss';
+import 'react-select/dist/react-select.css';
 
 class App extends Component {
   constructor(props) {

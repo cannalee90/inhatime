@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+
 import Btn from './../../common/btn';
 import { renderField } from './../../common/field';
+import renderSelect from './../../common/react-select';
 import validate from './validator';
 
 class UserSigninForm extends Component {
@@ -11,6 +13,14 @@ class UserSigninForm extends Component {
 
   render() {
     const { handleSubmit } = this.props;
+    const options = [
+      { value: 'C++11', label: 'C++11', ext: 'c++' },
+      { value: 'C++', label: 'C++', ext: 'cpp' },
+      { value: 'java', label: 'Java', ext: 'java' },
+      { value: 'python', label: 'Python', ext: 'py' },
+      { value: 'ruby', label: 'Ruby 1.8', ext: 'rb' },
+      { value: 'javascript', label: 'Javascript', ext: 'js' },
+    ];
     return (
       <div>
         <form className='' onSubmit={handleSubmit}>
@@ -36,6 +46,11 @@ class UserSigninForm extends Component {
             placeholder='비밀번호 확인'
             component={renderField}
             errorRender={false}
+          />
+          <Field
+            name='language'
+            options={options}
+            component={renderSelect}
           />
           <Btn
             className='btn btn-primary form-control'
