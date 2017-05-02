@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Btn from './../../common/btn';
 import { renderField } from './../../common/field';
+import validate from './validator';
 
 class UserSigninForm extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
     const { handleSubmit } = this.props;
@@ -18,6 +19,7 @@ class UserSigninForm extends Component {
             className='form-control'
             placeholder='이메일'
             component={renderField}
+            errorRender={false}
           />
           <Field
             name='password'
@@ -25,6 +27,7 @@ class UserSigninForm extends Component {
             className='form-control'
             placeholder='비밀번호'
             component={renderField}
+            errorRender={false}
           />
           <Btn
             className='btn btn-primary form-control'
@@ -39,6 +42,7 @@ class UserSigninForm extends Component {
 
 UserSigninForm = reduxForm({
   form: 'UserSigninForm',
+  validate,
 })(UserSigninForm);
 
 export default UserSigninForm;
