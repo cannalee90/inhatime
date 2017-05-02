@@ -48,6 +48,19 @@ export const userSignin = (values) => {
   };
 };
 
+export const userSignup = (values) => {
+  const { password, email } = values;
+  return (dispatch) => {
+    return httpPost('/user', values)
+    .then((data) => {
+      dispatch(userSignin({ password, email }));
+    })
+    .catch((errors) => {
+      return dispatch(sessionError(errors));
+    });
+  };
+};
+
 export const userSignout = () => {
   return (dispatch) => {
     localStorage.removeItem('inhatimeAuthToken');
