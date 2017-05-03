@@ -8,6 +8,8 @@ import ScheduleContainer from './containers/schedule-container';
 
 import UserSignin from './containers/user-signin';
 import UserSignup from './containers/user-signup';
+import UserPasswordFind from './containers/user-password-find';
+import UserPasswordReset from './containers/user-password-reset';
 
 export default (
   <Route path='/' component={App}>
@@ -15,6 +17,8 @@ export default (
     <Route path='user'>
       <Route path='signin' component={UserSignin} />
       <Route path='signup' component={UserSignup} />
+      <Route path='password' component={UserPasswordFind} />
+      <Route path='password/:hash' component={UserPasswordReset} />
     </Route>
   </Route>
 );
