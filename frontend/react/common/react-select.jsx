@@ -34,9 +34,9 @@ export default class ReactSelectWrapper extends Component {
 
   render() {
     const { error, touched, warning, errorRender } = this.props.meta;
-    const { options } = this.props;
+    const { options, wrapperClassName } = this.props;
     return (
-      <div className={`form-group ${(error && touched) ? 'has-error' : null}`}>
+      <div className={`${wrapperClassName} ${(error && touched) ? 'has-error' : null}`}>
         <Select
           name={this.props.input.name}
           options={options}
@@ -54,6 +54,7 @@ export default class ReactSelectWrapper extends Component {
 ReactSelectWrapper.defaultProps = {
   init: {},
   errorRender: false,
+  wrapperClassName: 'form-group'
 };
 
 ReactSelectWrapper.propTypes = {
@@ -62,4 +63,5 @@ ReactSelectWrapper.propTypes = {
   options: PropTypes.array.isRequired,
   init: PropTypes.object,
   errorRender: PropTypes.bool,
+  wrapperClassName: PropTypes.string,
 };
