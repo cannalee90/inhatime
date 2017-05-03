@@ -30,6 +30,7 @@ class CourseSearchForm extends Component {
               { label: '교수', value: 'instructor' },
             ]}
             selected={this.selected}
+            wrapperIdName='search-filter'
             onChange={this.onQueryChange}
           />
           <Field

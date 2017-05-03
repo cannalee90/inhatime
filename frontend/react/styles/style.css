@@ -301,11 +301,9 @@ a:activated {
 
 
 /* drop down btns */
-.btn-drop {
-  /*display: none;*/
+/*.btn-drop {
   position: absolute;
   text-align: center;
-  max-width: auto;
   padding: 10px;
   background: #fff;
   border: 1px solid var(--oc-cyan-3);
@@ -328,7 +326,7 @@ a:activated {
 .drop-too-long {
   max-height:200px;
   overflow-y: auto;
-}
+}*/
 
 @media (max-width:780px) {
 
@@ -627,33 +625,7 @@ a:activated {
 
 
 /* drop down btns */
-.btn-drop {
-  /*display: none;*/
-  position: absolute;
-  text-align: center;
-  max-width: auto;
-  padding: 10px;
-  background: #fff;
-  border: 1px solid #54729E;
-  line-height:2em;
-  transform: translateX(-5px) translateY(5px);
-}
 
-.btn-drop a, form {
-  color: #000;
-}
-.btn-drop a:hover {
-  color: #54729E;
-}
-
-.drop-active {
-  color: #54729E !important;
-}
-
-.drop-too-long {
-  max-height:200px;
-  overflow-y: auto;
-}
 
 @media (max-width:780px) {
 
