@@ -94,7 +94,12 @@ export const passwordReset = (values) => {
   return (dispatch) => {
     return httpPost('/auth/password', values)
     .then((data) => {
-      dispatch(push('/'));
+      dispatch(push({
+        pathname: '/user/signin',
+        state: {
+          infos: ['메일을 확인해주세요'],
+        },
+      }));
     })
     .catch((errors) => {
       return dispatch(sessionError(errors));
@@ -124,7 +129,12 @@ export const passwordChange = (values) => {
   return (dispatch) => {
     return httpPut('/auth/password/', values)
     .then((data) => {
-      dispatch(push('/user/signin'));
+      dispatch(push({
+        pathname: '/user/signin',
+        state: {
+          infos: ['비밀번호가 변경되었습니다.'],
+        },
+      }));
     })
     .catch((errors) => {
       dispatch(sessionError(errors));
