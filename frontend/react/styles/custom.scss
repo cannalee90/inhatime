@@ -122,3 +122,12 @@
 .timetable-header > div:last-child {
   margin-right: 0;
 }
+
+.redux-form {
+  .form-control {
+    border-radius: 0;
+  }
+  .Select-control {
+    border-radius: 0;
+  }
+}

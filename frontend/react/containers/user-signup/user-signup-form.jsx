@@ -22,10 +22,11 @@ class UserSigninForm extends Component {
     ];
     return (
       <div>
-        <form className='' onSubmit={handleSubmit}>
+        <form className='redux-form' onSubmit={handleSubmit}>
           <Field
             name='email'
             className='form-control'
+            wrapperClassName='form-group margin-bottom-10'
             placeholder='이메일'
             component={renderField}
             errorRender={false}
@@ -34,6 +35,7 @@ class UserSigninForm extends Component {
             name='password'
             type='password'
             className='form-control'
+            wrapperClassName='form-group margin-bottom-10'
             placeholder='비밀번호'
             component={renderField}
             errorRender={false}
@@ -42,12 +44,14 @@ class UserSigninForm extends Component {
             name='passwordConfirmation'
             type='password'
             className='form-control'
+            wrapperClassName='form-group margin-bottom-10'
             placeholder='비밀번호 확인'
             component={renderField}
             errorRender={false}
           />
           <Field
             name='department'
+            wrapperClassName='form-group margin-bottom-10'
             options={options}
             component={renderSelect}
           />

@@ -13,11 +13,12 @@ class UserSigninForm extends Component {
     const { handleSubmit } = this.props;
     return (
       <div>
-        <form className='' onSubmit={handleSubmit}>
+        <form className='redux-form' onSubmit={handleSubmit}>
           <Field
             name='email'
             className='form-control'
             placeholder='이메일'
+            wrapperClassName='from-group margin-bottom-10'
             component={renderField}
             errorRender={false}
           />
@@ -25,6 +26,7 @@ class UserSigninForm extends Component {
             name='password'
             type='password'
             className='form-control'
+            wrapperClassName='from-group margin-bottom-10'
             placeholder='비밀번호'
             component={renderField}
             errorRender={false}
