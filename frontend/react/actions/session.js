@@ -1,4 +1,4 @@
-import { httpGet, httpPost } from './../utils/request';
+import { httpGet, httpPost, httpPut } from './../utils/request';
 import { push } from 'react-router-redux';
 
 export const USER_SIGNIN = 'USER_SIGNIN';
@@ -6,11 +6,27 @@ export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const DEL_CURRENT_USER = 'DEL_CURRENT_USER';
 export const SESSION_ERROR = 'SESSION_ERROR';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+export const CLEAR_INFOS = 'CLEAR_INFOS';
+export const SESSION_INFO = 'SESSION_INFO';
+
+const parseErrors = (errors) => {
+  if (errors.response) {
+    return errors.response.data.errors;
+  }
+  return ['App.layout.event.UnexpectedErrors'];
+};
 
 const setCurrentUser = (data) => {
   return {
     type: SET_CURRENT_USER,
     data,
+  };
+};
+
+const sessionInfos = (infos) => {
+  return {
+    type: SESSION_INFO,
+    infos,
   };
 };
 
@@ -36,8 +52,14 @@ export const sessionError = (errors) => {
 export const clearErrors = () => {
   return {
     type: CLEAR_ERRORS,
-  }
-}
+  };
+};
+
+export const clearInfos = () => {
+  return {
+    type: CLEAR_INFOS,
+  };
+};
 
 export const userSignin = (values) => {
   return (dispatch) => {
@@ -64,6 +86,48 @@ export const userSignup = (values) => {
     })
     .catch((errors) => {
       return dispatch(sessionError(errors));
+    });
+  };
+};
+
+export const passwordReset = (values) => {
+  return (dispatch) => {
+    return httpPost('/auth/password', values)
+    .then((data) => {
+      dispatch(push('/'));
+    })
+    .catch((errors) => {
+      return dispatch(sessionError(errors));
+    });
+  };
+};
+
+export const passwordConfirm = (hash) => {
+  return (dispatch) => {
+    return httpPost(`/auth/password/${hash}`)
+    .then((data) => {
+      localStorage.setItem('inhatimeAuthToken', data.token);
+      return dispatch(sessionInfos(['비밀번호 초기화에 성공했습니다', '새로운 비밀번호로 변경해주세요.']));
+    })
+    .catch((errors) => {
+      dispatch(push({
+        pathname: '/user/password',
+        state: {
+          errors: parseErrors(errors),
+        }
+      }));
+    });
+  };
+};
+
+export const passwordChange = (values) => {
+  return (dispatch) => {
+    return httpPut('/auth/password/', values)
+    .then((data) => {
+      dispatch(push('/user/signin'));
+    })
+    .catch((errors) => {
+      dispatch(sessionError(errors));
     });
   };
 };
