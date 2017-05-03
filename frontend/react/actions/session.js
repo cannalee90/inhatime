@@ -5,6 +5,7 @@ export const USER_SIGNIN = 'USER_SIGNIN';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const DEL_CURRENT_USER = 'DEL_CURRENT_USER';
 export const SESSION_ERROR = 'SESSION_ERROR';
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
 const setCurrentUser = (data) => {
   return {
@@ -31,6 +32,12 @@ export const sessionError = (errors) => {
     errors: 'App.session.errors',
   };
 };
+
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS,
+  }
+}
 
 export const userSignin = (values) => {
   return (dispatch) => {

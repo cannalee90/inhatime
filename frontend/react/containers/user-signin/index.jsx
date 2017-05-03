@@ -4,8 +4,9 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import UserSigninForm from './user-signin-form';
-import { userSignin } from './../../actions/session';
+import { userSignin, clearErrors } from './../../actions/session';
 import LinkTo from './../../common/link-to';
+import ErrorRender from './../../components/error-render';
 
 class UserSignin extends Component {
   constructor(props) {
@@ -13,15 +14,24 @@ class UserSignin extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentWillUnmount() {
+    this.props.clearErrors();
+  }
+
   onSubmit(values) {
     this.props.userSignin(values);
   }
 
   render() {
+    const { session } = this.props;
+    const { errors } = session;
     return (
       <div className='container content'>
         <div className='row'>
           <div className='col-md-4 col-md-offset-4 col-sm-3 col-sm-offset-3'>
+            <ErrorRender
+              messages={errors}
+            />
             <UserSigninForm
               onSubmit={this.onSubmit}
               errorRender={false}
@@ -47,18 +57,19 @@ class UserSignin extends Component {
   }
 }
 
-const mapStateToProps = () => {
+const mapStateToProps = ({ session }) => {
   return {
-
+    session,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ userSignin }, dispatch);
+  return bindActionCreators({ userSignin, clearErrors }, dispatch);
 };
 
 UserSignin.propTypes = {
   userSignin: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
 };
 
 

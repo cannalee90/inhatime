@@ -33,7 +33,7 @@ export default class ReactSelectWrapper extends Component {
   }
 
   render() {
-    const { error, touched, warning } = this.props.meta;
+    const { error, touched, warning, errorRender } = this.props.meta;
     const { options } = this.props;
     return (
       <div className={`form-group ${(error && touched) ? 'has-error' : null}`}>
@@ -45,7 +45,7 @@ export default class ReactSelectWrapper extends Component {
           onFocus={this.onBlur}
           onBlur={this.onFoucs}
         />
-        { touched && ((error && <span className='error'>{error}</span>) || (warning && <span className='warning'>{warning}</span>)) }
+        {errorRender && touched && ((error && <span className='error'>{error}</span>) || (warning && <span className='warning'>{warning}</span>)) }
       </div>
     );
   }
@@ -53,6 +53,7 @@ export default class ReactSelectWrapper extends Component {
 
 ReactSelectWrapper.defaultProps = {
   init: {},
+  errorRender: false,
 };
 
 ReactSelectWrapper.propTypes = {
@@ -60,4 +61,5 @@ ReactSelectWrapper.propTypes = {
   input: PropTypes.object.isRequired,
   options: PropTypes.array.isRequired,
   init: PropTypes.object,
+  errorRender: PropTypes.bool,
 };

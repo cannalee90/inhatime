@@ -29,6 +29,11 @@ export default (state = initialState, actions) => {
         currentUser: initialState.currentUser,
         errors: [],
       };
+    case Action.CLEAR_ERRORS:
+      return {
+        ...state,
+        errors: [],
+      };
     default:
       return state;
   }

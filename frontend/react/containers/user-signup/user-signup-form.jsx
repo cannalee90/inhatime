@@ -14,12 +14,11 @@ class UserSigninForm extends Component {
   render() {
     const { handleSubmit } = this.props;
     const options = [
-      { value: 'C++11', label: 'C++11', ext: 'c++' },
-      { value: 'C++', label: 'C++', ext: 'cpp' },
-      { value: 'java', label: 'Java', ext: 'java' },
-      { value: 'python', label: 'Python', ext: 'py' },
-      { value: 'ruby', label: 'Ruby 1.8', ext: 'rb' },
-      { value: 'javascript', label: 'Javascript', ext: 'js' },
+      { label: '기계공학과', value: '0198005' },
+      { label: '항공우주학과', value: '1013446' },
+      { label: '컴퓨터공학과', value: '1184217' },
+      { label: '철학과', value: '0302072' },
+      { label: '정보통신공학과', value: '1185283' },
     ];
     return (
       <div>
@@ -48,7 +47,7 @@ class UserSigninForm extends Component {
             errorRender={false}
           />
           <Field
-            name='language'
+            name='department'
             options={options}
             component={renderSelect}
           />
