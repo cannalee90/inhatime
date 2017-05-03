@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 import UserSigninForm from './user-signin-form';
 import { userSignin, clearErrors } from './../../actions/session';
 import LinkTo from './../../common/link-to';
-import ErrorRender from './../../components/error-render';
+import RenderAlerts from './../../components/error-render';
+import { concatErrors, concatInfos } from './../../utils/helper';
 
 class UserSignin extends Component {
   constructor(props) {
@@ -23,14 +24,19 @@ class UserSignin extends Component {
   }
 
   render() {
-    const { session } = this.props;
-    const { errors } = session;
+    const { session, location } = this.props;
+    const errorMessages = concatErrors(session, location.state);
+    const infoMessages = concatInfos(session, location.state);
     return (
       <div className='container content'>
         <div className='row'>
           <div className='col-md-4 col-md-offset-4 col-sm-3 col-sm-offset-3'>
-            <ErrorRender
-              messages={errors}
+            <RenderAlerts
+              messages={errorMessages}
+            />
+            <RenderAlerts
+              messages={infoMessages}
+              type='success'
             />
             <UserSigninForm
               onSubmit={this.onSubmit}

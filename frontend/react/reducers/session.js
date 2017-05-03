@@ -8,6 +8,7 @@ const initialState = {
     emailAuth: false,
   },
   errors: [],
+  infos: [],
 };
 
 export default (state = initialState, actions) => {
@@ -29,10 +30,20 @@ export default (state = initialState, actions) => {
         currentUser: initialState.currentUser,
         errors: [],
       };
+    case Action.SESSION_INFO:
+      return {
+        ...state,
+        infos: actions.infos,
+      };
     case Action.CLEAR_ERRORS:
       return {
         ...state,
         errors: [],
+      };
+    case Action.CLEAR_INFOS:
+      return {
+        ...state,
+        infos: [],
       };
     default:
       return state;
