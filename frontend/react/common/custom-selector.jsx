@@ -58,7 +58,9 @@ export default class CustomSelector extends Component {
     this.setState({
       selected: option,
     });
-    this.props.onChange(option.value);
+    if (this.props.onChange) {
+      this.props.onChange(option.value);
+    }
   }
 
   toggleSelect(e) {

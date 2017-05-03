@@ -1,3 +1,5 @@
+@import 'helper.scss';
+
 .btn {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -100,6 +102,9 @@
 .custom-select-label {
 }
 
+//custom selector end
+
+
 .content {
   margin-top: 40px;
   margin-bottom: 40px;
@@ -108,4 +113,12 @@
 .has-error .Select-control {
   border-color: #a94442;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+
+.timetable-header > div {
+  margin-right: 3px;
+}
+
+.timetable-header > div:last-child {
+  margin-right: 0;
 }
