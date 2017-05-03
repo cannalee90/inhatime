@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const renderField = ({ errorRender, disabled, input, label, type, placeholder, meta: { touched, error, warning } }) => {
+const renderField = ({ wrapperClassName, className, errorRender, disabled, input, label, type, placeholder, meta: { touched, error, warning } }) => {
   if (label || label.length === 0) {
-    <div className={`form-group ${(error && touched) ? 'has-error' : null}`}>
+    <div className={`${wrapperClassName} ${(error && touched) ? 'has-error' : null}`}>
       <label className='col-sm-2 control-label' htmlFor={input.name}>{label}</label>
       <div className='col-sm-10'>
         <input
           {...input}
           placeholder={placeholder}
           type={type}
-          className='form-control'
+          className={className}
           disabled={disabled}
         />
         {errorRender && (touched && ((error && <strong className='error'><span>{error}</span></strong>) || (warning && <span className='warning'>{warning}</span>))) }
@@ -18,12 +18,12 @@ const renderField = ({ errorRender, disabled, input, label, type, placeholder, m
     </div>;
   }
   return (
-    <div className={`form-group ${(error && touched) ? 'has-error' : null}`}>
+    <div className={`${wrapperClassName} ${(error && touched) ? 'has-error' : null}`}>
       <input
         {...input}
         placeholder={placeholder}
         type={type}
-        className='form-control'
+        className={className}
         disabled={disabled}
       />
       {errorRender && (touched && ((error && <strong className='error'><span>{error}</span></strong>) || (warning && <span className='warning'>{warning}</span>)))}
@@ -36,6 +36,8 @@ renderField.defaultProps = {
   disabled: false,
   type: 'text',
   label: '',
+  className: 'form-control',
+  wrapperClassName: 'from-group',
 };
 
 renderField.propTypes = {
@@ -45,6 +47,8 @@ renderField.propTypes = {
   label: PropTypes.string,
   input: PropTypes.object.isRequired,
   meta: PropTypes.object.isRequired,
+  className: PropTypes.string,
+  wrapperClassName: PropTypes.string,
 };
 
 export { renderField };

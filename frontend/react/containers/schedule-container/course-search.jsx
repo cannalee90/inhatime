@@ -1,6 +1,7 @@
 import React from 'react';
+import RenderTable from 'Components/render-table';
+
 import CourseSearchForm from './course-search-form';
-import RenderTable from './render-table';
 
 export default (props) => {
   return (

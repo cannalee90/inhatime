@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import CustomSelector from './../common/custom-selector';
-import Btn from './../common/btn';
-import { renderField } from './../common/field';
+import CustomSelector from 'Common/custom-selector';
+import Btn from 'Common/btn';
+import { renderField } from 'Common/field';
 
 class CourseSearchForm extends Component {
   constructor(props) {
@@ -36,6 +36,7 @@ class CourseSearchForm extends Component {
             name='search'
             className='search-text'
             placeholder='운영체제...'
+            wrapperClassName='search-text-wrapper'
             component={renderField}
           />
           <Btn

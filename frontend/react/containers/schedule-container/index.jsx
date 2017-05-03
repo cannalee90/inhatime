@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import CourseSearch from './../components/course-search';
-import Timetable from './../components/timetable';
+import Timetable from 'Components/timetable';
+
+import CourseSearch from './course-search';
 
 class ScheduleContainer extends Component {
   // constructor(props) {
