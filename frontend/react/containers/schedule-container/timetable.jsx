@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import TimeTableHeader from './timetable-header'
+import PropTypes from 'prop-types';
+import TimeTableHeader from './timetable-header';
 import SelectedCourse from './selected-course';
 import { calOffset, timeSplit } from './../../utils/helper';
 
@@ -21,22 +22,6 @@ const selectedCourses = [
     'TermId': 5,
     'majorTitle': '컴퓨터공학과 / 컴퓨터공학'
   },
-  // {
-  //   'id': 2792,
-  //   'grade': '3',
-  //   'credit': 3,
-  //   'classType': '전공선택',
-  //   'time': 'D2T13T14T15:하-001;D4T13T14T15:하-120;',
-  //   'instructor': '송민석',
-  //   'eval': '상대평가',
-  //   'etc': ' ',
-  //   'code': 'CSE3206-002',
-  //   'title': '오퍼레이팅시스템',
-  //   'active': true,
-  //   'url': 'http://sugang.inha.ac.kr/sugang/SU_51001/Lec_Time_Search.aspx',
-  //   'TermId': 5,
-  //   'majorTitle': '컴퓨터공학과 / 컴퓨터공학'
-  // },
 ];
 
 class TimeTable extends Component {
@@ -48,11 +33,16 @@ class TimeTable extends Component {
     };
     this.setWidths = this.setWidths.bind(this);
     this.setHeights = this.setHeights.bind(this);
+    this.handleWidthAndHeight = this.handleWidthAndHeight.bind(this);
   }
 
   componentDidMount() {
-    this.setWidths();
-    this.setHeights();
+    this.handleWidthAndHeight();
+    window.addEventListener('resize', this.handleWidthAndHeight);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleWidthAndHeight);
   }
 
   setWidths() {
@@ -79,17 +69,23 @@ class TimeTable extends Component {
     });
   }
 
+  handleWidthAndHeight() {
+    this.setWidths();
+    this.setHeights();
+  }
+
+
   renderSelectedCourses() {
     const { widths, heights } = this.state;
     const leftOffset = calOffset(widths, 0);
     const topOffset = calOffset(heights, 0);
     return selectedCourses.map((course) => {
-      const courseTimes = timeSplit(course.time);
-      return courseTimes.map((courseTime) => {
+      const courseData = timeSplit(course.time);
+      return courseData.map((courseDatum) => {
         return (
           <SelectedCourse
             course={course}
-            courseTime={courseTime}
+            courseTime={courseDatum}
             widths={this.state.widths}
             heights={this.state.heights}
             leftOffset={leftOffset}
@@ -101,6 +97,13 @@ class TimeTable extends Component {
   }
 
   render() {
+    //TODO NOT WORKED BORDER_BOTTOM_WITH property
+    const { borderBottomWidth, borderRightWidth } = this.props;
+    const weekDayInWord = ['', '월', '화', '수', '목', '금', '토'];
+    const cellStyle = {
+      borderRight: `${borderRightWidth} solid var(--oc-gray-3)`,
+      borderBottom: `${borderBottomWidth} solid var(--oc-gray-3)`,
+    };
     return (
       <div>
         <TimeTableHeader />
@@ -112,21 +115,20 @@ class TimeTable extends Component {
             <table className='table-basic'>
               <tbody id='tableBody'>
                 <tr>
-                  <th />
-                  <th>월</th>
-                  <th>화</th>
-                  <th>수</th>
-                  <th>목</th>
-                  <th>금</th>
-                  <th>토</th>
+                  {_.times(7, (weekDayIdx) => {
+                    return (
+                      <td key={weekDayIdx} style={cellStyle}>{weekDayInWord[weekDayIdx]}</td>
+                    );
+                  })
+                  }
                 </tr>
                 {_.times(20, (rowIdx) => {
                   return (
                     <tr key={rowIdx}>
-                      <td key={`${rowIdx}-0`}>{rowIdx + 1}</td>
+                      <td style={cellStyle} key={`${rowIdx}-0`}>{rowIdx + 1}</td>
                       {_.times(6, (colIdx) => {
                         return (
-                          <td key={`${rowIdx}-${colIdx + 1}`} />
+                          <td key={`${rowIdx}-${colIdx + 1}`} style={cellStyle} />
                         );
                       })}
                     </tr>
@@ -145,6 +147,11 @@ class TimeTable extends Component {
     );
   }
 }
+
+TimeTable.defaultProps = {
+  borderRightWidth: '1px',
+  borderBottomWidth: '1px',
+};
 
 /* <td className='table-active' id='lecture-minus'>
   <div className='lecture-close-btn' data-toggle='modal' data-target='#modal_minus'>&times;</div>

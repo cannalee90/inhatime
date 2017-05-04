@@ -163,7 +163,7 @@
 }
 
 .talbe-basic, th, td {
-  border-bottom: 1px solid var(--oc-gray-3);
+  // border-bottom: 1px solid var(--oc-gray-3);
 }
 
 .table-wrap2 {
@@ -179,25 +179,28 @@
 
 .table-wrap2 th {
   text-align: center;
-  border-right: 1px solid var(--oc-gray-3);
+  border-right-color: var(--oc-gray-3);
   width: 14.2857%;
 }
 
 .table-wrap2 td {
   padding: 5px;
   text-align: center;
-  border-right: 1px solid var(--oc-gray-3);
+  border-right-color: var(--oc-gray-3);
   width: 14.2857%;
   height: 30px;
 }
 
 .talbe-basic, th, td {
-  border-bottom: 1px solid var(--oc-gray-3);
+  border-bottom-color: var(--oc-gray-3);
 }
-
 
 #table-pivot {
   height: 0;
   width: 0;
   position: relative;
+}
+
+.selectedCourse {
+  font-size: 11px;
 }
