@@ -1,16 +1,22 @@
-import { CLEAR_COURSES, FETCH_COURSES } from 'Contestants';
-
+import * as Action from 'Actions/course';
 
 const initialState = {
   courses: [],
+  errors: [],
 };
 
 export default (state = initialState, actions) => {
   switch (actions.type) {
-    case CLEAR_COURSES:
-      return state;
-    case FETCH_COURSES:
-      return initialState;
+    case Action.FETCH_COURSES:
+      return {
+        ...state,
+        courses: actions.data.courses,
+      };
+    case Action.CLEAR_ERRORS:
+      return {
+        ...state,
+        errors: [],
+      };
     default:
       return state;
   }

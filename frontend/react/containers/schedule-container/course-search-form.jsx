@@ -12,20 +12,21 @@ class CourseSearchForm extends Component {
   }
 
   componentDidMount() {
-    this.props.change('query', this.selected);
+    this.props.change('type', this.selected);
   }
 
   onQueryChange(value) {
-    this.props.change('query', value);
+    this.props.change('type', value);
   }
 
   render() {
+    const { handleSubmit } = this.props;
     return (
       <div>
-        <form className='searchFromContainer'>
+        <form className='searchFromContainer' onSubmit={handleSubmit}>
           <CustomSelector
             options={[
-              { label: '과목명', value: 'course' },
+              { label: '과목명', value: 'courseName' },
               { label: '전공명', value: 'major' },
               { label: '교수', value: 'instructor' },
             ]}
@@ -34,15 +35,15 @@ class CourseSearchForm extends Component {
             onChange={this.onQueryChange}
           />
           <Field
-            name='search'
+            name='query'
             className='search-text'
-            placeholder='운영체제...'
             wrapperClassName='search-text-wrapper'
             component={renderField}
           />
           <Btn
             className='btn btn-middle'
             value='검색'
+            type='submit'
           />
         </form>
       </div>
