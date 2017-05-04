@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export const concatErrors = (...args) => {
   let errorMessages = [];
   args.forEach((arg) => {
@@ -35,7 +37,6 @@ export const concatInfos = (...args) => {
     } else if (Array.isArray(arg)) {
       info = arg;
       valid = true;
-
     } else if (typeof arg === 'object' && arg.infos) {
       if (typeof arg.infos === 'string') {
         info = [arg.infos];
@@ -49,4 +50,43 @@ export const concatInfos = (...args) => {
     }
   });
   return infoMessages;
+};
+
+export const timeSplit = (data) => {
+  const dataArray = data.split(';');
+  return _.chain(dataArray)
+  .map((day) => {
+    const daySplit = day.split(':');
+    if (daySplit.length === 1) {
+      return false;
+    }
+    return {
+      classTime: daySplit[0],
+      classRoom: daySplit[1],
+    };
+  })
+  .filter((datum) => {
+    return datum !== false;
+  })
+  .value();
+};
+
+export const codeToKorean = ({ classTime, classRoom }) => {
+  const weekDay = ['월', '화', '수', '목', '금', '토', '일'];
+  const splitData = classTime.split('T');
+  if (classTime === 'D0T0') {
+    return classRoom;
+  }
+  const ret = _.chain(splitData)
+  .map((datum) => {
+    switch (datum[0]) {
+      case 'D':
+        return `${weekDay[_.toNumber(datum[1])]}-`;
+      default:
+        return `${datum.toString()},`;
+    }
+  })
+  .value()
+  .join('');
+  return `${ret.slice(0, -1)}(${classRoom})`;
 };

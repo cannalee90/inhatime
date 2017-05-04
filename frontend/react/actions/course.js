@@ -14,6 +14,7 @@ const parseErrors = (errors) => {
   if (errors.response) {
     return errors.response.data.errors;
   }
+  console.log(errors);
   return ['App.layout.event.UnexpectedErrors'];
 };
 
