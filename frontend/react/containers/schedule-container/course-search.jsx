@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import RenderTable from 'Components/render-table';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { searchCourses } from 'Actions/course';
 
 import CourseSearchForm from './course-search-form';
+import RenderTable from './render-table';
+
 
 class CourseSearch extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class CourseSearch extends Component {
   }
 
   render() {
+    const { courses } = this.props;
     return (
       <div>
         <div className='row box'>
@@ -25,7 +27,9 @@ class CourseSearch extends Component {
           />
         </div>
         <div className='row box box-bottom'>
-          <RenderTable />
+          <RenderTable
+            courses={courses}
+          />
         </div>
       </div>
     );

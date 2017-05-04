@@ -490,9 +490,6 @@ a:activated {
   padding:5px;
 }
 
-.table-active {
-  background: var(--oc-cyan-0);
-}
 
 .table-basic th, td {
   padding: 5px;
