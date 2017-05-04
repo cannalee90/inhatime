@@ -142,3 +142,55 @@
 .course-table-row {
   height: 10px;
 }
+
+
+.table-basic {
+  font-size:9pt;
+  width:100%;
+  min-height:40vh;
+  background-color:white;
+  color:var(--oc-gray-8);
+  padding:5px;
+}
+
+.table-active {
+  background: var(--oc-cyan-0);
+}
+
+.table-basic th, td {
+  padding: 5px;
+  text-align: left;
+}
+
+.talbe-basic, th, td {
+  border-bottom: 1px solid var(--oc-gray-3);
+}
+
+.table-wrap2 {
+  width:100%;
+  // height:calc(100vh - 250px);
+  // overflow-y: auto;
+  background:#fff;
+}
+
+.table-wrap2 .table-basic {
+  // min-height: calc(100vh - 250px);
+}
+
+.table-wrap2 th {
+  text-align: center;
+  border-right: 1px solid var(--oc-gray-3);
+  width: 14.2857%;
+}
+
+.table-wrap2 td {
+  padding: 5px;
+  text-align: center;
+  border-right: 1px solid var(--oc-gray-3);
+  width: 14.2857%;
+  height: 30px;
+}
+
+.talbe-basic, th, td {
+  border-bottom: 1px solid var(--oc-gray-3);
+}
