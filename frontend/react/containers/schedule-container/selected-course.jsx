@@ -10,14 +10,14 @@ class SelectedCourse extends Component {
     const { courseTime, widths, heights, leftOffset, topOffset } = this.props;
     const width = widths[courseTime.classDayIdx] + 1;
     const left = leftOffset[courseTime.classDayIdx];
-
-
+    const top = topOffset[courseTime.classTimeBegin];
+    const height = topOffset[courseTime.classTimeLast + 1] - topOffset[courseTime.classTimeBegin] + 1
     const divStyle = {
       position: 'absolute',
-      top: '100px',
+      top,
       left,
       backgroundColor: '#FEE251',
-      height: '100px',
+      height,
       width,
     };
 

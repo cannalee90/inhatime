@@ -64,11 +64,11 @@ export const getClassDayIdx = (splitedTime) => {
 
 //웹강일 경우 D0T0
 export const getClassTimeBegin = (splitedTime) => {
-  return _.toNumber(splitedTime[1].replace('T', ''));
+  return _.toNumber(splitedTime[1]);
 }
 
 export const getClassTimeLast = (splitedTime) => {
-  return _.toNumber(splitedTime.pop().replace('T', ''));
+  return _.toNumber(splitedTime.pop());
 }
 
 export const timeSplit = (data) => {
@@ -119,7 +119,7 @@ export const codeToKorean = ({ classTime, classRoom }) => {
   return `${ret.slice(0, -1)}(${classRoom})`;
 };
 
-export const calOffset = (arr) => {
+export const calOffset = (arr, offset = 10) => {
   return _.chain(arr)
   .transform((result, elem) => {
     // let acc = 0;
@@ -127,6 +127,6 @@ export const calOffset = (arr) => {
     //   acc = _.last(result);
     // }
     return result.push(_.last(result) + elem);
-  }, [10])
+  }, [offset])
   .value();
 };

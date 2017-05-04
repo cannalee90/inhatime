@@ -56,7 +56,7 @@ class TimeTable extends Component {
   }
 
   setWidths() {
-    const ths = document.getElementById('tableHeader').childNodes[0].childNodes;
+    const ths = document.getElementById('tableBody').childNodes[0].childNodes;
     const widths = _.chain(ths)
     .map((th) => {
       return th.offsetWidth;
@@ -71,7 +71,7 @@ class TimeTable extends Component {
     const trs = document.getElementById('tableBody').childNodes;
     const heights = _.chain(trs)
     .map((tr) => {
-      return tr.offsetWidth;
+      return tr.offsetHeight;
     })
     .value();
     this.setState({
@@ -81,8 +81,8 @@ class TimeTable extends Component {
 
   renderSelectedCourses() {
     const { widths, heights } = this.state;
-    const leftOffset = calOffset(widths);
-    const topOffset = calOffset(heights);
+    const leftOffset = calOffset(widths, 0);
+    const topOffset = calOffset(heights, 0);
     return selectedCourses.map((course) => {
       const courseTimes = timeSplit(course.time);
       return courseTimes.map((courseTime) => {
@@ -96,7 +96,7 @@ class TimeTable extends Component {
             topOffset={topOffset}
           />
         );
-      })
+      });
     });
   }
 
@@ -110,7 +110,7 @@ class TimeTable extends Component {
               {this.renderSelectedCourses()}
             </div>
             <table className='table-basic'>
-              <thead id='tableHeader'>
+              <tbody id='tableBody'>
                 <tr>
                   <th />
                   <th>월</th>
@@ -120,8 +120,6 @@ class TimeTable extends Component {
                   <th>금</th>
                   <th>토</th>
                 </tr>
-              </thead>
-              <tbody id='tableBody'>
                 {_.times(20, (rowIdx) => {
                   return (
                     <tr key={rowIdx}>
