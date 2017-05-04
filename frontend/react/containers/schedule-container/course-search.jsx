@@ -14,7 +14,7 @@ class CourseSearch extends Component {
   }
 
   onSubmit(values) {
-    this.props.searchCourses({...values, termId: 5});
+    this.props.searchCourses({ ...values, termId: 5 });
   }
 
   render() {
@@ -39,11 +39,11 @@ class CourseSearch extends Component {
 const mapStateToProps = ({ course }) => {
   return {
     courses: course.courses,
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ searchCourses }, dispatch);
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CourseSearch);

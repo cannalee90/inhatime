@@ -52,6 +52,25 @@ export const concatInfos = (...args) => {
   return infoMessages;
 };
 
+export const getClassDayInWord = (idx) => {
+  const weekDay = ['웹', '월', '화', '수', '목', '금', '토', '일'];
+  return weekDay[idx];
+}
+
+export const getClassDayIdx = (splitedTime) => {
+  return _.toNumber(splitedTime[0].replace('D', ''));
+}
+
+
+//웹강일 경우 D0T0
+export const getClassTimeBegin = (splitedTime) => {
+  return _.toNumber(splitedTime[1].replace('T', ''));
+}
+
+export const getClassTimeLast = (splitedTime) => {
+  return _.toNumber(splitedTime.pop().replace('T', ''));
+}
+
 export const timeSplit = (data) => {
   const dataArray = data.split(';');
   return _.chain(dataArray)
@@ -60,8 +79,17 @@ export const timeSplit = (data) => {
     if (daySplit.length === 1) {
       return false;
     }
+    const splitedTime = daySplit[0].split('T');
+    const classDayIdx = getClassDayIdx(splitedTime);
+    const classDayInWord = getClassDayInWord(classDayIdx);
+    const classTimeBegin = getClassTimeBegin(splitedTime);
+    const classTimeLast = getClassTimeLast(splitedTime);
     return {
       classTime: daySplit[0],
+      classDayIdx,
+      classDayInWord,
+      classTimeBegin,
+      classTimeLast,
       classRoom: daySplit[1],
     };
   })
@@ -89,4 +117,16 @@ export const codeToKorean = ({ classTime, classRoom }) => {
   .value()
   .join('');
   return `${ret.slice(0, -1)}(${classRoom})`;
+};
+
+export const calOffset = (arr) => {
+  return _.chain(arr)
+  .transform((result, elem) => {
+    // let acc = 0;
+    // if (_.last(result)) {
+    //   acc = _.last(result);
+    // }
+    return result.push(_.last(result) + elem);
+  }, [10])
+  .value();
 };

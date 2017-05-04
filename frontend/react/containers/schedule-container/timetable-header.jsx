@@ -18,7 +18,7 @@ class TimetableHeader extends Component {
           // selected={this.selected}
           wrapperClassName='inline-block btn-large margin-right-5'
           wrapperIdName='choice-semester'
-          // onChange={this.onQueryChange}
+          onChange={(e) => { }}
         />
         <CustomSelector
           options={[
@@ -28,6 +28,7 @@ class TimetableHeader extends Component {
           ]}
           wrapperClassName='inline-block btn-large margin-right-5'
           wrapperIdName='choice-timetable'
+          onChange={(e) => { }}
         />
         <div className='inline-block btn-small' data-toggle='modal' data-target='#modal_newtable'>
           <span className='glyphicon glyphicon-plus' />

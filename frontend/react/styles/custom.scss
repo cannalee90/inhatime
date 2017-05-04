@@ -194,3 +194,10 @@
 .talbe-basic, th, td {
   border-bottom: 1px solid var(--oc-gray-3);
 }
+
+
+#table-pivot {
+  height: '0';
+  width: '0';
+  position: 'relative';
+}
