@@ -204,3 +204,23 @@
 .selectedCourse {
   font-size: 11px;
 }
+
+
+.timetable-footer {
+  display: flex;
+}
+
+.save-btn {
+  margin-left: auto;
+  margin-right: 3px;
+}
+
+.clear-btn {
+}
+
+.show-credit {
+  background:none;
+  color:var(--oc-cyan-5);
+  cursor: inherit;
+  text-align: center;
+}

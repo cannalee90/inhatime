@@ -39,7 +39,14 @@ class TimeTable extends Component {
   }
 
   saveSchedule() {
+  }
 
+  calTotalCredit(courses) {
+    return courses.entrySeq().map(([courseId, course]) => {
+      return course.credit;
+    }).reduce((credit, acc) => {
+      return acc + credit;
+    }, 0);
   }
 
   setWidths() {
@@ -139,6 +146,7 @@ class TimeTable extends Component {
         <TimeTableFooter
           clearSchedule={this.clearSchedule}
           saveSchedule={this.saveSchedule}
+          totalCredit={this.calTotalCredit(this.props.selectedCourses)}
         />
       </div>
     );

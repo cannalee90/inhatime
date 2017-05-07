@@ -1,24 +1,24 @@
 import React from 'react';
+import Btn from 'Common/btn';
 
 export default (props) => {
   return (
-    <div className='row box box-bottom'>
-      <div className='inline-block btn-middle no-btn'>2 / 21학점</div>
-      <div className='inline-block btn-middle'
-        style={{ float: 'right', marginLeft: '3px' }}
+    <div className='row box box-bottom timetable-footer'>
+      <div className='show-credit btn-middle'>{props.totalCredit}학점</div>
+      <Btn
+        className='inline-block btn btn-middle save-btn'
         onClick={() => props.saveSchedule()}
-      >
-        저장
-      </div>
-      <div
-        className='inline-block btn-middle btn-yellow'
-        style={{ float: 'right' }}
+        value='저장'
+        type='button'
+      />
+      <Btn
+        className='inline-block btn btn-middle btn-yellow clear-btn'
         data-toggle='modal'
         data-target='#modal_clear'
         onClick={() => props.clearSchedule()}
-      >
-        클리어
-      </div>
+        value='클리어'
+        type='button'
+      />
     </div>
   );
 };
