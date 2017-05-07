@@ -8,7 +8,7 @@ class CourseSearchForm extends Component {
   constructor(props) {
     super(props);
     this.onQueryChange = this.onQueryChange.bind(this);
-    this.selected = 'major';
+    this.selected = 'courseName';
   }
 
   componentDidMount() {

@@ -3,6 +3,7 @@ import * as Action from 'Actions/course';
 const initialState = {
   courses: [],
   errors: [],
+  selectedCourses: [],
 };
 
 export default (state = initialState, actions) => {
@@ -16,6 +17,11 @@ export default (state = initialState, actions) => {
       return {
         ...state,
         errors: [],
+      };
+    case Action.SELECT_COURSE:
+      return {
+        ...state,
+        selectedCourses: [...state.selectedCourses, actions.course],
       };
     default:
       return state;

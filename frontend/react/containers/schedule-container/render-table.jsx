@@ -3,7 +3,7 @@ import { timeSplit, codeToKorean } from './../../utils/helper';
 
 class RenderTable extends Component {
   render() {
-    const { courses } = this.props;
+    const { courses, onSelect } = this.props;
     return (
       <div className='table-wrap'>
         <table className='table-basic'>
@@ -27,7 +27,7 @@ class RenderTable extends Component {
                 return codeToKorean(p);
               });
               return (
-                <tr key={course.id} className='course-table-row'>
+                <tr key={course.id} className='course-table-row' onClick={() => onSelect(course)}>
                   <td>{course.code}</td>
                   <td>{course.title}</td>
                   <td>{course.classType}</td>

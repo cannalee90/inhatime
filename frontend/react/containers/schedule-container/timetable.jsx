@@ -1,28 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import TimeTableHeader from './timetable-header';
 import SelectedCourse from './selected-course';
 import { calOffset, timeSplit } from './../../utils/helper';
-
-const selectedCourses = [
-  {
-    'id': 2791,
-    'grade': '3',
-    'credit': 3,
-    'classType': '전공선택',
-    'time': 'D2T4T5T6:하-001;D4T7T8T9:하-120;',
-    'instructor': '송민석',
-    'eval': '상대평가',
-    'etc': ' ',
-    'code': 'CSE3206-001',
-    'title': '오퍼레이팅시스템',
-    'active': true,
-    'url': 'http://sugang.inha.ac.kr/sugang/SU_51001/Lec_Time_Search.aspx',
-    'TermId': 5,
-    'majorTitle': '컴퓨터공학과 / 컴퓨터공학'
-  },
-];
 
 class TimeTable extends Component {
   constructor(props) {
@@ -79,7 +62,7 @@ class TimeTable extends Component {
     const { widths, heights } = this.state;
     const leftOffset = calOffset(widths, 0);
     const topOffset = calOffset(heights, 0);
-    return selectedCourses.map((course) => {
+    return this.props.selectedCourses.map((course) => {
       const courseData = timeSplit(course.time);
       return courseData.map((courseDatum) => {
         return (
@@ -158,5 +141,15 @@ TimeTable.defaultProps = {
   <span className='lecture-title-table'>디자인과 생활</span><br/>실기실
 </td> */
 
+const mapStateToProps = ({ course }) => {
+  return {
+    selectedCourses: course.selectedCourses,
+  };
+};
 
-export default TimeTable;
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({}, dispatch);
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(TimeTable);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { searchCourses } from 'Actions/course';
+import { searchCourses, selectCourse } from 'Actions/course';
 
 import CourseSearchForm from './course-search-form';
 import RenderTable from './render-table';
@@ -11,10 +11,15 @@ class CourseSearch extends Component {
   constructor(props) {
     super(props)
     this.onSubmit = this.onSubmit.bind(this);
+    this.onCourseSelect = this.onCourseSelect.bind(this);
   }
 
   onSubmit(values) {
     this.props.searchCourses({ ...values, termId: 5 });
+  }
+
+  onCourseSelect(course) {
+    this.props.selectCourse(course);
   }
 
   render() {
@@ -29,6 +34,7 @@ class CourseSearch extends Component {
         <div className='row box box-bottom'>
           <RenderTable
             courses={courses}
+            onSelect={this.onCourseSelect}
           />
         </div>
       </div>
@@ -43,7 +49,7 @@ const mapStateToProps = ({ course }) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ searchCourses }, dispatch);
+  return bindActionCreators({ searchCourses, selectCourse }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CourseSearch);

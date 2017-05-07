@@ -3,12 +3,13 @@ import { httpPost } from './../utils/request';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const COURSE_ERRORS = 'COURSE_ERRORS';
 export const FETCH_COURSES = 'FETCH_COURSES';
+export const SELECT_COURSE = 'SELECT_COURSE';
 
 export const clearErrors = () => {
   return {
     type: CLEAR_ERRORS,
-  }
-}
+  };
+};
 
 const parseErrors = (errors) => {
   if (errors.response) {
@@ -18,7 +19,20 @@ const parseErrors = (errors) => {
   return ['App.layout.event.UnexpectedErrors'];
 };
 
-
+export const selectCourse = (course) => {
+  return (dispatch) => {
+    if (course) {
+      return dispatch({
+        type: SELECT_COURSE,
+        course,
+      });
+    }
+    return dispatch({
+      type: COURSE_ERRORS,
+      errors: ['App.layout.event.selectCours.notEmpty'],
+    });
+  };
+};
 
 export const searchCourses = (values) => {
   return (dispatch) => {
