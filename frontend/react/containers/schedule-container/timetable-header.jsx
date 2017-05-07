@@ -15,27 +15,32 @@ class TimetableHeader extends Component {
     });
   }
 
+  scheduleOptions(schedules) {
+    return schedules.map((schedule) => {
+      return {
+        label: schedule.get('title'),
+        value: schedule.get('id'),
+      };
+    }).toArray();
+  }
+
   render() {
-    const { terms } = this.props;
+    const { terms, fetchSchedules, schedules, changeSchedule } = this.props;
     const termOptions = this.termOptions(terms);
+    const scheduleOptions = this.scheduleOptions(schedules);
     return (
       <div className='row box timetable-header'>
         <CustomSelector
           options={termOptions}
-          selected={_.last(termOptions)}
           wrapperClassName='inline-block btn-large margin-right-5'
           wrapperIdName='choice-semester'
-          onChange={(e) => { }}
+          onChange={(value) => { fetchSchedules(value); }}
         />
         <CustomSelector
-          options={[
-            { label: '시간표 1', value: '1' },
-            { label: '시간표 2', value: '2' },
-            { label: '시간표 3', value: '3' },
-          ]}
+          options={scheduleOptions}
           wrapperClassName='inline-block btn-large margin-right-5'
           wrapperIdName='choice-timetable'
-          onChange={(e) => { }}
+          onChange={(value) => { changeSchedule(value); }}
         />
         <div className='inline-block btn-small' data-toggle='modal' data-target='#modal_newtable'>
           <span className='glyphicon glyphicon-plus' />

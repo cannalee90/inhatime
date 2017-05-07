@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { clearSchedule, removeCourse, fetchTerms } from 'Actions/course';
+import {
+  clearSchedule,
+  removeCourse,
+  fetchTerms,
+  fetchSchedules,
+  changeSchedule,
+} from 'Actions/course';
 
 import _ from 'lodash';
 import PropTypes from 'prop-types';
@@ -24,6 +30,9 @@ class TimeTable extends Component {
     this.clearSchedule = this.clearSchedule.bind(this);
     this.saveSchedule = this.saveSchedule.bind(this);
     this.removeCourse = this.removeCourse.bind(this);
+    this.fetchSchedules = this.fetchSchedules.bind(this);
+    this.changeSchedule = this.changeSchedule.bind(this);
+
   }
 
   componentDidMount() {
@@ -40,11 +49,21 @@ class TimeTable extends Component {
     this.props.clearSchedule();
   }
 
+  fetchSchedules(termId) {
+    if (termId) {
+      this.props.fetchSchedules(termId);
+    }
+  }
+
   saveSchedule() {
   }
 
   removeCourse(courseId) {
     this.props.removeCourse(courseId);
+  }
+
+  changeSchedule(scheduleId) {
+    this.props.changeSchedule(scheduleId);
   }
 
   calTotalCredit(courses) {
@@ -91,7 +110,7 @@ class TimeTable extends Component {
     const topOffset = calOffset(heights, 0);
     const { selectedCourses } = this.props;
     return selectedCourses.entrySeq().map(([courseId, course]) => {
-      const courseData = timeSplit(course.time);
+      const courseData = timeSplit(course.get('time'));
       return courseData.map((courseDatum) => {
         return (
           <SelectedCourse
@@ -110,7 +129,7 @@ class TimeTable extends Component {
 
   render() {
     //TODO NOT WORKED BORDER_BOTTOM_WITH property
-    const { borderBottomWidth, borderRightWidth, terms } = this.props;
+    const { borderBottomWidth, borderRightWidth, terms, termSchedules } = this.props;
     const weekDayInWord = ['', '월', '화', '수', '목', '금', '토'];
     const cellStyle = {
       borderRight: `${borderRightWidth} solid var(--oc-gray-3)`,
@@ -120,6 +139,9 @@ class TimeTable extends Component {
       <div>
         <TimeTableHeader
           terms={terms}
+          schedules={termSchedules}
+          fetchSchedules={this.fetchSchedules}
+          changeSchedule={this.changeSchedule}
         />
         <div className='row box'>
           <div className='table-wrap2'>
@@ -176,11 +198,12 @@ const mapStateToProps = ({ course }) => {
   return {
     selectedCourses: course.selectedCourses,
     terms: course.terms,
+    termSchedules: course.termSchedules,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ clearSchedule, removeCourse, fetchTerms }, dispatch);
+  return bindActionCreators({ changeSchedule, clearSchedule, removeCourse, fetchTerms, fetchSchedules, }, dispatch);
 };
 
 

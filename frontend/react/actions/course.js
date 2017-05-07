@@ -7,6 +7,8 @@ export const SELECT_COURSE = 'SELECT_COURSE';
 export const CLEAR_SCHEDULE = 'CLEAR_SCHEDULE';
 export const REMOVE_COURSE = 'REMOVE_COURSE';
 export const FETCH_TERMS = 'FETCH_TERMS';
+export const FETCH_SCHEDULES = 'FETCH_SCHEDULES';
+export const CHANGE_SCHEDULE = 'CHANGE_SCHEDULE';
 
 export const clearErrors = () => {
   return {
@@ -33,6 +35,15 @@ export const selectCourse = (course) => {
     return dispatch({
       type: COURSE_ERRORS,
       errors: ['App.layout.event.selectCours.notEmpty'],
+    });
+  };
+};
+
+export const changeSchedule = (scheduleId) => {
+  return (dispatch) => {
+    return dispatch({
+      type: CHANGE_SCHEDULE,
+      data: scheduleId,
     });
   };
 };
@@ -65,6 +76,15 @@ export const removeCourse = (courseId) => {
     return dispatch({
       type: REMOVE_COURSE,
       data: courseId,
+    });
+  };
+};
+
+export const fetchSchedules = (termId) => {
+  return (dispatch) => {
+    return dispatch({
+      type: FETCH_SCHEDULES,
+      data: termId,
     });
   };
 };

@@ -6,6 +6,8 @@ const initialState = {
   courses: [],
   selectedCourses: Immutable.Map(),
   terms: [],
+  schedules: Immutable.List(),
+  termSchedules: Immutable.List(),
 };
 
 
@@ -15,11 +17,32 @@ export default (state = initialState, actions) => {
       return {
         ...state,
         terms: actions.data.terms,
+        schedules: Immutable.fromJS(actions.data.schedules),
       };
     case Action.FETCH_COURSES:
       return {
         ...state,
         courses: actions.data.courses,
+      };
+    case Action.CHANGE_SCHEDULE:
+      const selectedCourses = Immutable.Map(
+        state.schedules.filter((schedule) => {
+          return schedule.get('id') === actions.data;
+        })
+        .get(0)
+        .get('Courses')
+        .map(course => [course.get('id'), course])
+      );
+      return {
+        ...state,
+        selectedCourses,
+      };
+    case Action.FETCH_SCHEDULES:
+      return {
+        ...state,
+        termSchedules: state.schedules.filter((schedule) => {
+          return schedule.get('TermId') === actions.data;
+        }),
       };
     case Action.CLEAR_ERRORS:
       return {
