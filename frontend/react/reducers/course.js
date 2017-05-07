@@ -30,6 +30,11 @@ export default (state = initialState, actions) => {
         ...state,
         selectedCourses: Immutable.Map().clear(),
       };
+    case Action.REMOVE_COURSE:
+      return {
+        ...state,
+        selectedCourses: state.selectedCourses.delete(actions.data),
+      };
     default:
       return state;
   }

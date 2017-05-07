@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { clearSchedule } from 'Actions/course';
+import { clearSchedule, removeCourse } from 'Actions/course';
 
 import _ from 'lodash';
 import PropTypes from 'prop-types';
@@ -23,6 +23,7 @@ class TimeTable extends Component {
     this.handleWidthAndHeight = this.handleWidthAndHeight.bind(this);
     this.clearSchedule = this.clearSchedule.bind(this);
     this.saveSchedule = this.saveSchedule.bind(this);
+    this.removeCourse = this.removeCourse.bind(this);
   }
 
   componentDidMount() {
@@ -39,6 +40,11 @@ class TimeTable extends Component {
   }
 
   saveSchedule() {
+  }
+
+  removeCourse(courseId) {
+    console.log(courseId);
+    this.props.removeCourse(courseId);
   }
 
   calTotalCredit(courses) {
@@ -95,6 +101,7 @@ class TimeTable extends Component {
             heights={this.state.heights}
             leftOffset={leftOffset}
             topOffset={topOffset}
+            onClick={this.removeCourse}
           />
         );
       });
@@ -170,7 +177,7 @@ const mapStateToProps = ({ course }) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ clearSchedule }, dispatch);
+  return bindActionCreators({ clearSchedule, removeCourse }, dispatch);
 };
 
 
