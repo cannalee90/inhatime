@@ -43,7 +43,6 @@ class TimeTable extends Component {
   }
 
   removeCourse(courseId) {
-    console.log(courseId);
     this.props.removeCourse(courseId);
   }
 
