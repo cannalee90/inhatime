@@ -1,10 +1,12 @@
 import * as Action from 'Actions/course';
+import Immutable from 'immutable';
 
 const initialState = {
-  courses: [],
   errors: [],
-  selectedCourses: [],
+  courses: [],
+  selectedCourses: Immutable.Map(),
 };
+
 
 export default (state = initialState, actions) => {
   switch (actions.type) {
@@ -21,7 +23,7 @@ export default (state = initialState, actions) => {
     case Action.SELECT_COURSE:
       return {
         ...state,
-        selectedCourses: [...state.selectedCourses, actions.course],
+        selectedCourses: state.selectedCourses.set(actions.data.id, actions.data),
       };
     default:
       return state;

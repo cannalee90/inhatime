@@ -62,7 +62,8 @@ class TimeTable extends Component {
     const { widths, heights } = this.state;
     const leftOffset = calOffset(widths, 0);
     const topOffset = calOffset(heights, 0);
-    return this.props.selectedCourses.map((course) => {
+    const { selectedCourses } = this.props;
+    return selectedCourses.entrySeq().map(([courseId, course]) => {
       const courseData = timeSplit(course.time);
       return courseData.map((courseDatum) => {
         return (

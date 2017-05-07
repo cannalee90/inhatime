@@ -21,7 +21,7 @@ class RenderTable extends Component {
             </tr>
           </thead>
           <tbody>
-            {courses.map((course) => {
+            {courses && courses.map((course) => {
               let courseTime = timeSplit(course.time);
               courseTime = courseTime.map((p) => {
                 return codeToKorean(p);
@@ -48,4 +48,3 @@ class RenderTable extends Component {
 }
 
 export default RenderTable;
-//active className='table-active'

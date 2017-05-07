@@ -24,7 +24,7 @@ export const selectCourse = (course) => {
     if (course) {
       return dispatch({
         type: SELECT_COURSE,
-        course,
+        data: course,
       });
     }
     return dispatch({
