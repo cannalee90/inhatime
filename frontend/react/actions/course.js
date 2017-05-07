@@ -1,4 +1,4 @@
-import { httpPost } from './../utils/request';
+import { httpPost, httpGet } from './../utils/request';
 
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const COURSE_ERRORS = 'COURSE_ERRORS';
@@ -6,6 +6,7 @@ export const FETCH_COURSES = 'FETCH_COURSES';
 export const SELECT_COURSE = 'SELECT_COURSE';
 export const CLEAR_SCHEDULE = 'CLEAR_SCHEDULE';
 export const REMOVE_COURSE = 'REMOVE_COURSE';
+export const FETCH_TERMS = 'FETCH_TERMS';
 
 export const clearErrors = () => {
   return {
@@ -36,22 +37,37 @@ export const selectCourse = (course) => {
   };
 };
 
+export const fetchTerms = () => {
+  return (dispatch) => {
+    return httpGet('/terms')
+    .then((data) => {
+      return dispatch({
+        type: FETCH_TERMS,
+        data,
+      });
+    })
+    .catch((errors) => {
+      return parseErrors(errors);
+    });
+  };
+};
+
 export const clearSchedule = () => {
   return (dispatch) => {
     return dispatch({
       type: CLEAR_SCHEDULE,
     });
-  }
-}
+  };
+};
 
 export const removeCourse = (courseId) => {
   return (dispatch) => {
     return dispatch({
       type: REMOVE_COURSE,
-      data: courseId
+      data: courseId,
     });
-  }
-}
+  };
+};
 
 export const searchCourses = (values) => {
   return (dispatch) => {

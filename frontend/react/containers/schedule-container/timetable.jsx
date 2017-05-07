@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { clearSchedule, removeCourse } from 'Actions/course';
+import { clearSchedule, removeCourse, fetchTerms } from 'Actions/course';
 
 import _ from 'lodash';
 import PropTypes from 'prop-types';
@@ -28,6 +28,7 @@ class TimeTable extends Component {
 
   componentDidMount() {
     this.handleWidthAndHeight();
+    this.props.fetchTerms();
     window.addEventListener('resize', this.handleWidthAndHeight);
   }
 
@@ -109,7 +110,7 @@ class TimeTable extends Component {
 
   render() {
     //TODO NOT WORKED BORDER_BOTTOM_WITH property
-    const { borderBottomWidth, borderRightWidth } = this.props;
+    const { borderBottomWidth, borderRightWidth, terms } = this.props;
     const weekDayInWord = ['', '월', '화', '수', '목', '금', '토'];
     const cellStyle = {
       borderRight: `${borderRightWidth} solid var(--oc-gray-3)`,
@@ -117,7 +118,9 @@ class TimeTable extends Component {
     };
     return (
       <div>
-        <TimeTableHeader />
+        <TimeTableHeader
+          terms={terms}
+        />
         <div className='row box'>
           <div className='table-wrap2'>
             <div id='table-pivot'>
@@ -172,11 +175,12 @@ TimeTable.defaultProps = {
 const mapStateToProps = ({ course }) => {
   return {
     selectedCourses: course.selectedCourses,
+    terms: course.terms,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ clearSchedule, removeCourse }, dispatch);
+  return bindActionCreators({ clearSchedule, removeCourse, fetchTerms }, dispatch);
 };
 
 

@@ -3,12 +3,12 @@ import React, { Component } from 'react';
 // import { bindActionCreators } from 'redux';
 
 import 'bootstrap/dist/css/bootstrap.css';
+import 'react-select/dist/react-select.css';
 
 import Nav from './../components/nav';
 import Footer from './../components/footer';
 import './../styles/style.css';
 import './../styles/custom.scss';
-import 'react-select/dist/react-select.css';
 
 class App extends Component {
   constructor(props) {

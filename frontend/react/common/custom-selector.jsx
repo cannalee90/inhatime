@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
+import PropTypes from 'prop-types';
 
 export default class CustomSelector extends Component {
   constructor(props) {
@@ -20,6 +21,12 @@ export default class CustomSelector extends Component {
 
   componentDidMount() {
     this.setSelected(this.props.options, this.props.selected);
+  }
+
+  componentWillReceiveProps(nextProps, nextState) {
+    if (this.props.selected !== nextProps.selected) {
+      this.setSelected(nextProps.options, nextProps.selected);
+    }
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -45,13 +52,21 @@ export default class CustomSelector extends Component {
   setSelected(options, selected) {
     let ret = {};
     if (selected) {
+      let val = null;
+      if (typeof selected === 'object') {
+        val = selected.value;
+      } else {
+        val = selected;
+      }
       ret = options.filter((option) => {
-        return option.value === selected;
+        return option.value === val;
       })[0];
     } else {
       ret = options[0];
     }
-    this.changeSelected(ret);
+    if (ret) {
+      this.changeSelected(ret);
+    }
   }
 
   changeSelected(option) {
@@ -131,11 +146,15 @@ export default class CustomSelector extends Component {
 
 CustomSelector.defaultProps = {
   wrapperClassName: 'inline-block btn-middle',
+  selected: null,
 };
 
 
 CustomSelector.propTypes = {
-  options: React.PropTypes.array.isRequired,
-  selected: React.PropTypes.string,
-  onChange: React.PropTypes.func.isRequired,
+  options: PropTypes.array.isRequired,
+  selected: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]),
+  onChange: PropTypes.func.isRequired,
 };

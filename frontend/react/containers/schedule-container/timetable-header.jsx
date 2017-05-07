@@ -2,20 +2,27 @@ import React, { Component } from 'react';
 import CustomSelector from 'Common/custom-selector';
 
 class TimetableHeader extends Component {
-  super(props) {
+  constructor(props) {
+    super(props);
+  }
 
+  termOptions(terms) {
+    return terms.map((term) => {
+      return {
+        label: `${term.year}/${term.semester}`,
+        value: term.id,
+      };
+    });
   }
 
   render() {
+    const { terms } = this.props;
+    const termOptions = this.termOptions(terms);
     return (
       <div className='row box timetable-header'>
         <CustomSelector
-          options={[
-            { label: '2017년 봄학기', value: '1' },
-            { label: '2017년 여름학기', value: '2' },
-            { label: '2017년 가을학기', value: '3' },
-          ]}
-          // selected={this.selected}
+          options={termOptions}
+          selected={_.last(termOptions)}
           wrapperClassName='inline-block btn-large margin-right-5'
           wrapperIdName='choice-semester'
           onChange={(e) => { }}

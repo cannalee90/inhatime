@@ -5,11 +5,17 @@ const initialState = {
   errors: [],
   courses: [],
   selectedCourses: Immutable.Map(),
+  terms: [],
 };
 
 
 export default (state = initialState, actions) => {
   switch (actions.type) {
+    case Action.FETCH_TERMS:
+      return {
+        ...state,
+        terms: actions.data.terms,
+      };
     case Action.FETCH_COURSES:
       return {
         ...state,
