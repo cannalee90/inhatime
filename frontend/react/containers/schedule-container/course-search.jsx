@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { searchCourses, selectCourse } from 'Actions/course';
+import { searchCourses, selectCourse, clearCourses } from 'Actions/course';
 
 import CourseSearchForm from './course-search-form';
 import RenderTable from './render-table';

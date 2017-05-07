@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { clearSchedule } from 'Actions/course';
+
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import TimeTableHeader from './timetable-header';
+import TimeTableFooter from './timetable-footer';
 import SelectedCourse from './selected-course';
 import { calOffset, timeSplit } from './../../utils/helper';
+
 
 class TimeTable extends Component {
   constructor(props) {
@@ -17,6 +21,8 @@ class TimeTable extends Component {
     this.setWidths = this.setWidths.bind(this);
     this.setHeights = this.setHeights.bind(this);
     this.handleWidthAndHeight = this.handleWidthAndHeight.bind(this);
+    this.clearSchedule = this.clearSchedule.bind(this);
+    this.saveSchedule = this.saveSchedule.bind(this);
   }
 
   componentDidMount() {
@@ -26,6 +32,14 @@ class TimeTable extends Component {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleWidthAndHeight);
+  }
+
+  clearSchedule() {
+    this.props.clearSchedule();
+  }
+
+  saveSchedule() {
+
   }
 
   setWidths() {
@@ -122,11 +136,10 @@ class TimeTable extends Component {
             </table>
           </div>
         </div>
-        <div className='row box box-bottom'>
-          <div className='inline-block btn-middle no-btn'>2 / 21학점</div>
-          <div className='inline-block btn-middle' style={{ float: 'right', marginLeft: '3px' }}>저장</div>
-          <div className='inline-block btn-middle btn-yellow' style={{ float: 'right' }} data-toggle='modal' data-target='#modal_clear'>클리어</div>
-        </div>
+        <TimeTableFooter
+          clearSchedule={this.clearSchedule}
+          saveSchedule={this.saveSchedule}
+        />
       </div>
     );
   }
@@ -149,7 +162,7 @@ const mapStateToProps = ({ course }) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators({ clearSchedule }, dispatch);
 };
 
 

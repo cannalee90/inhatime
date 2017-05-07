@@ -4,6 +4,7 @@ export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const COURSE_ERRORS = 'COURSE_ERRORS';
 export const FETCH_COURSES = 'FETCH_COURSES';
 export const SELECT_COURSE = 'SELECT_COURSE';
+export const CLEAR_SCHEDULE = 'CLEAR_SCHEDULE';
 
 export const clearErrors = () => {
   return {
@@ -33,6 +34,14 @@ export const selectCourse = (course) => {
     });
   };
 };
+
+export const clearSchedule = () => {
+  return (dispatch) => {
+    return dispatch({
+      type: CLEAR_SCHEDULE,
+    });
+  }
+}
 
 export const searchCourses = (values) => {
   return (dispatch) => {

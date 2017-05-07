@@ -25,6 +25,11 @@ export default (state = initialState, actions) => {
         ...state,
         selectedCourses: state.selectedCourses.set(actions.data.id, actions.data),
       };
+    case Action.CLEAR_SCHEDULE:
+      return {
+        ...state,
+        selectedCourses: Immutable.Map().clear(),
+      };
     default:
       return state;
   }
