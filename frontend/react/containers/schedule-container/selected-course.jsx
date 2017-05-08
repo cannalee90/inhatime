@@ -30,17 +30,17 @@ class SelectedCourse extends Component {
 
   render() {
     const { courseTime, onClick, course } = this.props;
-    const courseId = course.get('id');
+    const { id, title, instructor } = this.props.course;
     const divStyle = this.getDivStyle();
     return (
       <div
         style={divStyle}
         className='selectedCourse'
-        onClick={() => { onClick(courseId); }}
+        onClick={() => { onClick(id); }}
       >
-        {course.get('title')}
+        {title}
         <br />
-        {course.get('instructor')}
+        {instructor}
         <br />
         {courseTime.classRoom}
       </div>

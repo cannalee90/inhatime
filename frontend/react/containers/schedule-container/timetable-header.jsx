@@ -18,8 +18,8 @@ class TimetableHeader extends Component {
   scheduleOptions(schedules) {
     return schedules.map((schedule) => {
       return {
-        label: schedule.get('title'),
-        value: schedule.get('id'),
+        label: schedule.title,
+        value: schedule.id,
       };
     }).toArray();
   }

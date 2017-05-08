@@ -40,7 +40,7 @@ class TimeTableBody extends Component {
     const topOffset = calOffset(heights, 0);
     const { selectedCourses, removeCourse } = this.props;
     return selectedCourses.entrySeq().map(([courseId, course]) => {
-      const courseData = timeSplit(course.get('time'));
+      const courseData = timeSplit(course.time);
       return courseData.map((courseDatum) => {
         return (
           <SelectedCourse

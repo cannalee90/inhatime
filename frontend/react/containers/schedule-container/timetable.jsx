@@ -57,7 +57,7 @@ class TimeTable extends Component {
 
   calTotalCredit(courses) {
     return courses.entrySeq().map(([courseId, course]) => {
-      return course.get('credit');
+      return course.credit;
     }).reduce((credit, acc) => {
       return acc + credit;
     }, 0);

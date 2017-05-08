@@ -17,7 +17,6 @@ export default (state = initialState, actions) => {
       return {
         ...state,
         terms: actions.data.terms,
-        schedules: Immutable.fromJS(actions.data.schedules),
       };
     case Action.FETCH_COURSES:
       return {
@@ -25,24 +24,24 @@ export default (state = initialState, actions) => {
         courses: actions.data.courses,
       };
     case Action.CHANGE_SCHEDULE:
-      const selectedCourses = Immutable.Map(
-        state.schedules.filter((schedule) => {
-          return schedule.get('id') === actions.data;
-        })
-        .get(0)
-        .get('Courses')
-        .map(course => [course.get('id'), course])
-      );
       return {
         ...state,
-        selectedCourses,
+        selectedCourses: Immutable.Map(
+          state.termSchedules.filter((schedule) => {
+            return schedule.id === actions.data;
+          })
+          .get(0)
+          .Courses
+          .map(course => [course.id, course]),
+        ),
       };
     case Action.FETCH_SCHEDULES:
       return {
         ...state,
-        termSchedules: state.schedules.filter((schedule) => {
-          return schedule.get('TermId') === actions.data;
-        }),
+        termSchedules: Immutable.List(
+          state.terms.filter((term) => {
+            return term.id === actions.data;
+          })[0].Schedules),
       };
     case Action.CLEAR_ERRORS:
       return {
@@ -52,7 +51,7 @@ export default (state = initialState, actions) => {
     case Action.SELECT_COURSE:
       return {
         ...state,
-        selectedCourses: state.selectedCourses.set(actions.data.id, Immutable.Map(actions.data)),
+        selectedCourses: state.selectedCourses.set(actions.data.id, actions.data),
       };
     case Action.CLEAR_SCHEDULE:
       return {
