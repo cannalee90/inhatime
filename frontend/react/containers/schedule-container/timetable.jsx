@@ -20,7 +20,7 @@ import TimeTableFooter from './timetable-footer';
 class TimeTable extends Component {
   constructor(props) {
     super(props);
-    this.clearSchedule = this.clearSchedule.bind(this);
+    this.changeTerm = this.changeTerm.bind(this);
     this.saveSchedule = this.saveSchedule.bind(this);
     this.removeCourse = this.removeCourse.bind(this);
     this.fetchSchedules = this.fetchSchedules.bind(this);
@@ -29,10 +29,6 @@ class TimeTable extends Component {
 
   componentDidMount() {
     this.props.fetchTerms();
-  }
-
-  clearSchedule() {
-    this.props.clearSchedule();
   }
 
   fetchSchedules(termId) {
@@ -45,7 +41,6 @@ class TimeTable extends Component {
     const courseIds = this.props.selectedCourses.entrySeq().map(([courseId, course]) => {
       return courseId;
     }).toArray();
-
   }
 
   removeCourse(courseId) {
@@ -54,6 +49,10 @@ class TimeTable extends Component {
 
   changeSchedule(scheduleId) {
     this.props.changeSchedule(scheduleId);
+  }
+
+  changeTerm(termId) {
+    this.props.fetchSchedules(termId);
   }
 
   calTotalCredit(courses) {
@@ -70,11 +69,14 @@ class TimeTable extends Component {
       terms,
       termSchedules,
       selectedCourses,
+      clearSchedule,
+      changeSchedule,
      } = this.props;
     return (
       <div>
         <TimeTableHeader
           terms={terms}
+          changeTerm={this.changeTerm}
           schedules={termSchedules}
           fetchSchedules={this.fetchSchedules}
           changeSchedule={this.changeSchedule}
@@ -84,7 +86,7 @@ class TimeTable extends Component {
           removeCourse={this.removeCourse}
         />
         <TimeTableFooter
-          clearSchedule={this.clearSchedule}
+          clearSchedule={() => { clearSchedule(); }}
           saveSchedule={this.saveSchedule}
           totalCredit={this.calTotalCredit(this.props.selectedCourses)}
         />

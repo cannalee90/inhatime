@@ -25,7 +25,7 @@ class TimetableHeader extends Component {
   }
 
   render() {
-    const { terms, fetchSchedules, schedules, changeSchedule } = this.props;
+    const { terms, fetchSchedules, schedules, changeTerm, changeSchedule } = this.props;
     const termOptions = this.termOptions(terms);
     const scheduleOptions = this.scheduleOptions(schedules);
     return (
@@ -34,7 +34,7 @@ class TimetableHeader extends Component {
           options={termOptions}
           wrapperClassName='inline-block btn-large margin-right-5'
           wrapperIdName='choice-semester'
-          onChange={(value) => { fetchSchedules(value); }}
+          onChange={(termId) => { changeTerm(termId); }}
         />
         <CustomSelector
           options={scheduleOptions}
