@@ -130,3 +130,21 @@ export const calOffset = (arr, offset = 10) => {
   }, [offset])
   .value();
 };
+
+export const setWidths = (nodes) => {
+  return _.chain(nodes)
+  .map((th) => {
+    return th.offsetWidth;
+  })
+  .value();
+};
+
+export const setHeights = (nodes) => {
+  return _.chain(nodes)
+  .map((tr) => {
+    return tr.offsetHeight;
+  })
+  .value();
+};
+
+export const weekDayInWord = ['', '월', '화', '수', '목', '금', '토'];

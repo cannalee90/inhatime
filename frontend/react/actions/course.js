@@ -9,6 +9,7 @@ export const REMOVE_COURSE = 'REMOVE_COURSE';
 export const FETCH_TERMS = 'FETCH_TERMS';
 export const FETCH_SCHEDULES = 'FETCH_SCHEDULES';
 export const CHANGE_SCHEDULE = 'CHANGE_SCHEDULE';
+export const SAVE_SCHEDULE = 'SAVE_SCHEDULE';
 
 export const clearErrors = () => {
   return {
@@ -62,6 +63,15 @@ export const fetchTerms = () => {
     });
   };
 };
+
+export const saveSchedule = (data) => {
+  return (dispatch) => {
+    return dispatch({
+      type: SAVE_SCHEDULE,
+      data,
+    })
+  }
+}
 
 export const clearSchedule = () => {
   return (dispatch) => {

@@ -52,7 +52,7 @@ export default (state = initialState, actions) => {
     case Action.SELECT_COURSE:
       return {
         ...state,
-        selectedCourses: state.selectedCourses.set(actions.data.id, actions.data),
+        selectedCourses: state.selectedCourses.set(actions.data.id, Immutable.Map(actions.data)),
       };
     case Action.CLEAR_SCHEDULE:
       return {
