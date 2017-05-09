@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Btn = (props) => {
   const { className, onClick, type, value } = props;
@@ -20,10 +21,13 @@ Btn.defaultProps = {
 };
 
 Btn.propTypes = {
-  className: React.PropTypes.string,
-  onClick: React.PropTypes.func,
-  type: React.PropTypes.string,
-  value: React.PropTypes.string,
+  className: PropTypes.string,
+  onClick: PropTypes.func,
+  type: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
+  ]),
 };
 
 export default Btn;

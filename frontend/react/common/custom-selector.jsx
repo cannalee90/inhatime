@@ -74,7 +74,7 @@ export default class CustomSelector extends Component {
       selected: option,
     });
     if (this.props.onChange) {
-      this.props.onChange(option.value);
+      this.props.onChange(option);
     }
   }
 

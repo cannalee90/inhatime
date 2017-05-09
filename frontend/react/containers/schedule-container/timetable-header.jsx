@@ -9,6 +9,7 @@ class TimetableHeader extends Component {
       addScheduleModal: false,
     };
     this.toggleModal = this.toggleModal.bind(this);
+    this.addSchedule = this.addSchedule.bind(this);
   }
 
   termOptions(terms) {
@@ -18,6 +19,11 @@ class TimetableHeader extends Component {
         value: term.id,
       };
     });
+  }
+
+  addSchedule() {
+    this.toggleModal('addScheduleModal');
+    this.props.addSchedule();
   }
 
   scheduleOptions(schedules) {
@@ -36,7 +42,7 @@ class TimetableHeader extends Component {
   }
 
   render() {
-    const { terms, fetchSchedules, schedules, changeTerm, changeSchedule } = this.props;
+    const { terms, fetchSchedules, schedules, changeTerm, changeSchedule, onFormChange } = this.props;
     const termOptions = this.termOptions(terms);
     const scheduleOptions = this.scheduleOptions(schedules);
     return (
@@ -45,7 +51,7 @@ class TimetableHeader extends Component {
           options={termOptions}
           wrapperClassName='inline-block btn-large margin-right-5'
           wrapperIdName='choice-semester'
-          onChange={(termId) => { changeTerm(termId); }}
+          onChange={(term) => { changeTerm(term.value); }}
         />
         <CustomSelector
           options={scheduleOptions}
@@ -62,7 +68,8 @@ class TimetableHeader extends Component {
         <AddScheduleModal
           showModal={this.state.addScheduleModal}
           toggleModal={() => this.toggleModal('addScheduleModal')}
-          onSubmit={() => this.toggleModal('addScheduleModal')}
+          onSubmit={() => this.addSchedule()}
+          onFormChange={(field, value) => onFormChange(field, value)}
         />
       </div>
     );

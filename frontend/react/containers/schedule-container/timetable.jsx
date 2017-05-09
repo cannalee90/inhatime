@@ -20,12 +20,20 @@ import TimeTableFooter from './timetable-footer';
 class TimeTable extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      selectedTerm: null,
+      selectedSchedule: {
+        id: null,
+        title: null,
+      },
+    };
     this.changeTerm = this.changeTerm.bind(this);
     this.saveSchedule = this.saveSchedule.bind(this);
     this.removeCourse = this.removeCourse.bind(this);
     this.fetchSchedules = this.fetchSchedules.bind(this);
     this.changeSchedule = this.changeSchedule.bind(this);
     this.addSchedule = this.addSchedule.bind(this);
+    this.onFormChange = this.onFormChange.bind(this);
   }
 
   componentDidMount() {
@@ -38,8 +46,15 @@ class TimeTable extends Component {
     }
   }
 
-  addSchedule(value) {
-    console.log(value);
+  onFormChange(field, value) {
+    this.setState({
+      selectedSchedule: {
+        [field]: value,
+      },
+    });
+  }
+
+  addSchedule() {
   }
 
   saveSchedule() {
@@ -52,11 +67,20 @@ class TimeTable extends Component {
     this.props.removeCourse(courseId);
   }
 
-  changeSchedule(scheduleId) {
-    this.props.changeSchedule(scheduleId);
+  changeSchedule(schedule) {
+    this.setState({
+      selectedSchedule: {
+        id: schedule.id,
+        title: schedule.label,
+      },
+    });
+    this.props.changeSchedule(schedule.value);
   }
 
   changeTerm(termId) {
+    this.setState({
+      selectedTerm: termId,
+    });
     this.props.fetchSchedules(termId);
   }
 
@@ -84,6 +108,8 @@ class TimeTable extends Component {
           changeTerm={this.changeTerm}
           schedules={termSchedules}
           fetchSchedules={this.fetchSchedules}
+          onFormChange={this.onFormChange}
+          addSchedule={this.addSchedule}
           changeSchedule={this.changeSchedule}
         />
         <TimeTableBody

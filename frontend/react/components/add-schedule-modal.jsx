@@ -1,7 +1,6 @@
 import React from 'react';
 import Modal from 'Common/modal';
 import Btn from 'Common/btn';
-import ScheduleAddForm from './../containers/schedule-container/schedule-name-form';
 
 export default (props) => {
   return (
@@ -24,7 +23,9 @@ export default (props) => {
         </div>
       }
       bodyComponent={
-        <ScheduleAddForm />
+        <form>
+          <input type='text' className='search-text' onChange={(e) => { props.onFormChange('title', e.target.value); }} />
+        </form>
       }
       footerComponent={
         <Btn

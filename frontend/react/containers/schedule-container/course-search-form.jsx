@@ -15,8 +15,8 @@ class CourseSearchForm extends Component {
     this.props.change('type', this.selected);
   }
 
-  onQueryChange(value) {
-    this.props.change('type', value);
+  onQueryChange(option) {
+    this.props.change('type', option.value);
   }
 
   render() {
