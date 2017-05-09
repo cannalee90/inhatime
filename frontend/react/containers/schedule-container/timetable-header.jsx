@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import CustomSelector from 'Common/custom-selector';
+import AddScheduleModal from 'Components/add-schedule-modal';
 
 class TimetableHeader extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      addScheduleModal: false,
+    };
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   termOptions(terms) {
@@ -24,6 +29,12 @@ class TimetableHeader extends Component {
     }).toArray();
   }
 
+  toggleModal(key) {
+    this.setState({
+      [key]: !this.state[key],
+    });
+  }
+
   render() {
     const { terms, fetchSchedules, schedules, changeTerm, changeSchedule } = this.props;
     const termOptions = this.termOptions(terms);
@@ -42,12 +53,17 @@ class TimetableHeader extends Component {
           wrapperIdName='choice-timetable'
           onChange={(value) => { changeSchedule(value); }}
         />
-        <div className='inline-block btn-small' data-toggle='modal' data-target='#modal_newtable'>
+        <div className='inline-block btn-small' onClick={() => { this.toggleModal('addScheduleModal'); }}>
           <span className='glyphicon glyphicon-plus' />
         </div>
         <div className='inline-block btn-middle btn-yellow' style={{ float: 'right' }} data-toggle='modal' data-target='#modal_delete'>
           시간표 삭제
         </div>
+        <AddScheduleModal
+          showModal={this.state.addScheduleModal}
+          toggleModal={() => this.toggleModal('addScheduleModal')}
+          onSubmit={() => this.toggleModal('addScheduleModal')}
+        />
       </div>
     );
   }

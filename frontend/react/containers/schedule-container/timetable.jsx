@@ -25,6 +25,7 @@ class TimeTable extends Component {
     this.removeCourse = this.removeCourse.bind(this);
     this.fetchSchedules = this.fetchSchedules.bind(this);
     this.changeSchedule = this.changeSchedule.bind(this);
+    this.addSchedule = this.addSchedule.bind(this);
   }
 
   componentDidMount() {
@@ -35,6 +36,10 @@ class TimeTable extends Component {
     if (termId) {
       this.props.fetchSchedules(termId);
     }
+  }
+
+  addSchedule(value) {
+    console.log(value);
   }
 
   saveSchedule() {
