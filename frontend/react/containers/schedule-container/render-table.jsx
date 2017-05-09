@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { timeSplit, codeToKorean } from './../../utils/helper';
 
 class RenderTable extends Component {
@@ -46,5 +48,10 @@ class RenderTable extends Component {
     );
   }
 }
+
+RenderTable.propTypes = {
+  onSelect: PropTypes.func.isRequired,
+  courses: PropTypes.array.isRequired,
+};
 
 export default RenderTable;

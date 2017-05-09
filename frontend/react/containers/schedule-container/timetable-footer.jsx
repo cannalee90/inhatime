@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Btn from 'Common/btn';
 
-export default (props) => {
+const TimetableFooter = (props) => {
   return (
     <div className='row box box-bottom timetable-footer'>
       <div className='show-credit btn-middle'>{props.totalCredit}학점</div>
@@ -22,3 +23,11 @@ export default (props) => {
     </div>
   );
 };
+
+TimetableFooter.propTypes = {
+  totalCredit: PropTypes.number.isRequired,
+  saveSchedule: PropTypes.func.isRequired,
+  clearSchedule: PropTypes.func.isRequired,
+};
+
+export default TimetableFooter;

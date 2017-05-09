@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { renderField } from 'Common/field';
+import PropTypes from 'prop-types';
 
 class ScheduleAddForm extends Component {
   constructor(props) {
@@ -28,9 +29,11 @@ class ScheduleAddForm extends Component {
       </form>
     );
   }
-
-
 }
+
+ScheduleAddForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+};
 
 ScheduleAddForm = reduxForm({
   form: 'ScheduleAddForm',

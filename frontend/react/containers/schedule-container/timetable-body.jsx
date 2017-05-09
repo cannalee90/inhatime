@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
+import PropTypes from 'prop-types';
+
 import SelectedCourse from './selected-course';
 import {
   calOffset,
@@ -61,7 +64,6 @@ class TimeTableBody extends Component {
     const {
       borderBottomWidth,
       borderRightWidth,
-      selectedCourses,
      } = this.props;
 
     const cellStyle = {
@@ -105,11 +107,16 @@ class TimeTableBody extends Component {
   }
 }
 
-
 TimeTableBody.defaultProps = {
   borderRightWidth: '1px',
   borderBottomWidth: '1px',
 };
 
+TimeTableBody.propTypes = {
+  selectedCourses: PropTypes.object.isRequired,
+  borderBottomWidth: PropTypes.string,
+  borderRightWidth: PropTypes.string,
+  removeCourse: PropTypes.func.isRequired,
+};
 
 export default TimeTableBody;

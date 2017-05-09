@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import CustomSelector from 'Common/custom-selector';
 import Btn from 'Common/btn';
 import { renderField } from 'Common/field';
+import PropTypes from 'prop-types';
 
 class CourseSearchForm extends Component {
   constructor(props) {
@@ -49,9 +50,12 @@ class CourseSearchForm extends Component {
       </div>
     );
   }
-
-
 }
+
+CourseSearchForm.propTypes = {
+  change: PropTypes.func,
+  handleSubmit: PropTypes.func,
+};
 
 CourseSearchForm = reduxForm({
   form: 'CourseSearchForm',

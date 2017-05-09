@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 
 class SelectedCourse extends Component {
   constructor(props) {
@@ -8,11 +9,16 @@ class SelectedCourse extends Component {
   }
 
   getDivStyle() {
-    const { courseTime, widths, heights, leftOffset, topOffset } = this.props;
+    const {
+      courseTime,
+      widths,
+      leftOffset,
+      topOffset,
+    } = this.props;
     const width = widths[courseTime.classDayIdx] + 1;
     const left = leftOffset[courseTime.classDayIdx];
     const top = topOffset[courseTime.classTimeBegin];
-    const height = topOffset[courseTime.classTimeLast + 1] - topOffset[courseTime.classTimeBegin] + 1;
+    const height = topOffset[courseTime.classTimeLast + 1] - (topOffset[courseTime.classTimeBegin] + 1);
     if (_.isNumber(width) && _.isNumber(left) && _.isNumber(top) && _.isNumber(height)) {
       return {
         position: 'absolute',
@@ -29,7 +35,7 @@ class SelectedCourse extends Component {
   }
 
   render() {
-    const { courseTime, onClick, course } = this.props;
+    const { courseTime, onClick } = this.props;
     const { id, title, instructor } = this.props.course;
     const divStyle = this.getDivStyle();
     return (
@@ -47,5 +53,14 @@ class SelectedCourse extends Component {
     );
   }
 }
+
+SelectedCourse.propTypes = {
+  course: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired,
+  courseTime: PropTypes.object.isRequired,
+  widths: PropTypes.array.isRequired,
+  leftOffset: PropTypes.array.isRequired,
+  topOffset: PropTypes.array.isRequired,
+};
 
 export default SelectedCourse;

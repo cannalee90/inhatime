@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { searchCourses, selectCourse, clearCourses } from 'Actions/course';
+import {
+  searchCourses,
+  selectCourse,
+} from 'Actions/course';
+import PropTypes from 'prop-types';
+
 
 import CourseSearchForm from './course-search-form';
 import RenderTable from './render-table';
@@ -9,7 +14,7 @@ import RenderTable from './render-table';
 
 class CourseSearch extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.onSubmit = this.onSubmit.bind(this);
     this.onCourseSelect = this.onCourseSelect.bind(this);
   }
@@ -41,6 +46,12 @@ class CourseSearch extends Component {
     );
   }
 }
+
+CourseSearch.propTypes = {
+  searchCourses: PropTypes.func.isRequired,
+  selectCourse: PropTypes.func.isRequired,
+  courses: PropTypes.array.isRequired,
+};
 
 const mapStateToProps = ({ course }) => {
   return {
