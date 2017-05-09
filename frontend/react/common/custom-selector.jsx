@@ -53,7 +53,7 @@ export default class CustomSelector extends Component {
     let ret = {};
     if (selected) {
       let val = null;
-      if (typeof selected === 'object') {
+      if (typeof selected === 'object' && selected !== null && selected !== undefined) {
         val = selected.value;
       } else {
         val = selected;

@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
-import CustomSelector from 'Common/custom-selector';
+import { Field, reduxForm } from 'redux-form';
+import ReactSelect from 'Common/react-select';
+import PropTypes from 'prop-types';
+import _ from 'lodash';
+
 import AddScheduleModal from 'Components/add-schedule-modal';
+import AddScheduleBtn from './add-schedule-btn';
 
 class TimetableHeader extends Component {
   constructor(props) {
@@ -12,18 +17,24 @@ class TimetableHeader extends Component {
     this.addSchedule = this.addSchedule.bind(this);
   }
 
+  addSchedule() {
+    this.toggleModal('addScheduleModal');
+    this.props.addSchedule();
+  }
+
+  toggleModal(key) {
+    this.setState({
+      [key]: !this.state[key],
+    });
+  }
+
   termOptions(terms) {
-    return terms.map((term) => {
+    return _.map(terms, (term) => {
       return {
         label: `${term.year}/${term.semester}`,
         value: term.id,
       };
     });
-  }
-
-  addSchedule() {
-    this.toggleModal('addScheduleModal');
-    this.props.addSchedule();
   }
 
   scheduleOptions(schedules) {
@@ -35,45 +46,56 @@ class TimetableHeader extends Component {
     }).toArray();
   }
 
-  toggleModal(key) {
-    this.setState({
-      [key]: !this.state[key],
-    });
-  }
-
   render() {
-    const { terms, fetchSchedules, schedules, changeTerm, changeSchedule, onFormChange } = this.props;
-    const termOptions = this.termOptions(terms);
-    const scheduleOptions = this.scheduleOptions(schedules);
+    const termOptions = this.termOptions(this.props.terms);
+    const scheduleOptions = this.scheduleOptions(this.props.schedules);
     return (
-      <div className='row box timetable-header'>
-        <CustomSelector
-          options={termOptions}
-          wrapperClassName='inline-block btn-large margin-right-5'
-          wrapperIdName='choice-semester'
-          onChange={(term) => { changeTerm(term.value); }}
-        />
-        <CustomSelector
-          options={scheduleOptions}
-          wrapperClassName='inline-block btn-large margin-right-5'
-          wrapperIdName='choice-timetable'
-          onChange={(value) => { changeSchedule(value); }}
-        />
-        <div className='inline-block btn-small' onClick={() => { this.toggleModal('addScheduleModal'); }}>
-          <span className='glyphicon glyphicon-plus' />
+      <form onSubmit={this.props.handleSubmit} >
+        <div className='row box timetable-header'>
+          <Field
+            name='termId'
+            component={ReactSelect}
+            options={termOptions}
+          />
+          <Field
+            name='scheduleId'
+            component={ReactSelect}
+            options={scheduleOptions}
+          />
+          <AddScheduleBtn
+            onClick={() => { this.toggleModal('addScheduleModal'); }}
+          />
+          <div className='inline-block btn-middle btn-yellow' style={{ float: 'right' }} data-toggle='modal' data-target='#modal_delete'>
+            시간표 삭제
+          </div>
+          <AddScheduleModal
+            showModal={this.state.addScheduleModal}
+            toggleModal={() => this.toggleModal('addScheduleModal')}
+            onSubmit={() => this.addSchedule()}
+            onFormChange={(field, value) => this.props.onFormChange(field, value)}
+          />
         </div>
-        <div className='inline-block btn-middle btn-yellow' style={{ float: 'right' }} data-toggle='modal' data-target='#modal_delete'>
-          시간표 삭제
-        </div>
-        <AddScheduleModal
-          showModal={this.state.addScheduleModal}
-          toggleModal={() => this.toggleModal('addScheduleModal')}
-          onSubmit={() => this.addSchedule()}
-          onFormChange={(field, value) => onFormChange(field, value)}
-        />
-      </div>
+      </form>
     );
   }
 }
+
+TimetableHeader.defaultProps = {
+  selectedTerm: null,
+};
+
+TimetableHeader.propTypes = {
+  addSchedule: PropTypes.func.isRequired,
+  onFormChange: PropTypes.func.isRequired,
+  terms: PropTypes.array.isRequired,
+  schedules: PropTypes.array.isRequired,
+  selectedTerm: PropTypes.number,
+  selectedSchedule: PropTypes.number,
+};
+
+TimetableHeader = reduxForm({
+  form: 'TimetableHeader',
+})(TimetableHeader);
+
 
 export default TimetableHeader;

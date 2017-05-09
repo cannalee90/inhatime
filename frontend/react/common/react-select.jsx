@@ -54,7 +54,7 @@ export default class ReactSelectWrapper extends Component {
 ReactSelectWrapper.defaultProps = {
   init: {},
   errorRender: false,
-  wrapperClassName: 'form-group'
+  wrapperClassName: 'form-group',
 };
 
 ReactSelectWrapper.propTypes = {

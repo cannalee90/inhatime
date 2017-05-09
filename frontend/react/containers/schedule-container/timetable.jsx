@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import _ from 'lodash';
+import PropTypes from 'prop-types';
 import {
   clearSchedule,
   removeCourse,
@@ -10,12 +12,11 @@ import {
   saveSchedule,
 } from 'Actions/course';
 
-import _ from 'lodash';
-import PropTypes from 'prop-types';
+import { formValueSelector } from 'redux-form';
 import TimeTableHeader from './timetable-header';
 import TimeTableBody from './timetable-body';
-
 import TimeTableFooter from './timetable-footer';
+import { calTotalCredit } from './../../utils/helper';
 
 class TimeTable extends Component {
   constructor(props) {
@@ -30,7 +31,6 @@ class TimeTable extends Component {
     this.changeTerm = this.changeTerm.bind(this);
     this.saveSchedule = this.saveSchedule.bind(this);
     this.removeCourse = this.removeCourse.bind(this);
-    this.fetchSchedules = this.fetchSchedules.bind(this);
     this.changeSchedule = this.changeSchedule.bind(this);
     this.addSchedule = this.addSchedule.bind(this);
     this.onFormChange = this.onFormChange.bind(this);
@@ -40,9 +40,12 @@ class TimeTable extends Component {
     this.props.fetchTerms();
   }
 
-  fetchSchedules(termId) {
-    if (termId) {
-      this.props.fetchSchedules(termId);
+  componentWillReceiveProps(nextProps, nextState) {
+    if (this.props.termId !== nextProps.termId && nextProps.termId) {
+      this.props.fetchSchedules(nextProps.termId.value);
+    }
+    if (this.props.scheduleId !== nextProps.scheduleId && nextProps.scheduleId) {
+      this.props.changeSchedule(nextProps.scheduleId.value);
     }
   }
 
@@ -54,13 +57,11 @@ class TimeTable extends Component {
     });
   }
 
+
   addSchedule() {
   }
 
   saveSchedule() {
-    const courseIds = this.props.selectedCourses.entrySeq().map(([courseId, course]) => {
-      return courseId;
-    }).toArray();
   }
 
   removeCourse(courseId) {
@@ -68,32 +69,13 @@ class TimeTable extends Component {
   }
 
   changeSchedule(schedule) {
-    this.setState({
-      selectedSchedule: {
-        id: schedule.id,
-        title: schedule.label,
-      },
-    });
-    this.props.changeSchedule(schedule.value);
   }
 
   changeTerm(termId) {
-    this.setState({
-      selectedTerm: termId,
-    });
-    this.props.fetchSchedules(termId);
-  }
-
-  calTotalCredit(courses) {
-    return courses.entrySeq().map(([courseId, course]) => {
-      return course.credit;
-    }).reduce((credit, acc) => {
-      return acc + credit;
-    }, 0);
   }
 
   render() {
-    //TODO NOT WORKED BORDER_BOTTOM_WITH property
+    // TODO NOT WORKED BORDER_BOTTOM_WITH property
     const {
       terms,
       termSchedules,
@@ -105,12 +87,10 @@ class TimeTable extends Component {
       <div>
         <TimeTableHeader
           terms={terms}
-          changeTerm={this.changeTerm}
           schedules={termSchedules}
-          fetchSchedules={this.fetchSchedules}
+          selectedTerm={this.state.selectedTerm}
           onFormChange={this.onFormChange}
           addSchedule={this.addSchedule}
-          changeSchedule={this.changeSchedule}
         />
         <TimeTableBody
           selectedCourses={selectedCourses}
@@ -119,18 +99,31 @@ class TimeTable extends Component {
         <TimeTableFooter
           clearSchedule={() => { clearSchedule(); }}
           saveSchedule={this.saveSchedule}
-          totalCredit={this.calTotalCredit(this.props.selectedCourses)}
+          totalCredit={calTotalCredit(this.props.selectedCourses)}
         />
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ course }) => {
+TimeTable.propTypes = {
+  selectedCourses: PropTypes.object.isRequired,
+  fetchTerms: PropTypes.func.isRequired,
+  fetchSchedules: PropTypes.func.isRequired,
+  removeCourse: PropTypes.func.isRequired,
+  terms: PropTypes.array.isRequired,
+  termSchedules: PropTypes.object.isRequired,
+};
+
+const selector = formValueSelector('TimetableHeader');
+
+const mapStateToProps = (state) => {
   return {
-    selectedCourses: course.selectedCourses,
-    terms: course.terms,
-    termSchedules: course.termSchedules,
+    selectedCourses: state.course.selectedCourses,
+    terms: state.course.terms,
+    termSchedules: state.course.termSchedules,
+    termId: selector(state, 'termId'),
+    scheduleId: selector(state, 'scheduleId'),
   };
 };
 

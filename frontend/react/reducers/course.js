@@ -5,7 +5,15 @@ const initialState = {
   errors: [],
   courses: [],
   selectedCourses: Immutable.Map(),
-  terms: [],
+  terms: [
+    {
+      Schedules: [
+        {
+          Courses: [],
+        },
+      ],
+    },
+  ],
   schedules: Immutable.List(),
   termSchedules: Immutable.List(),
 };

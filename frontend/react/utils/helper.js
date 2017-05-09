@@ -55,21 +55,20 @@ export const concatInfos = (...args) => {
 export const getClassDayInWord = (idx) => {
   const weekDay = ['웹', '월', '화', '수', '목', '금', '토', '일'];
   return weekDay[idx];
-}
+};
 
 export const getClassDayIdx = (splitedTime) => {
   return _.toNumber(splitedTime[0].replace('D', ''));
-}
+};
 
 
-//웹강일 경우 D0T0
 export const getClassTimeBegin = (splitedTime) => {
   return _.toNumber(splitedTime[1]);
-}
+};
 
 export const getClassTimeLast = (splitedTime) => {
   return _.toNumber(splitedTime.pop());
-}
+};
 
 export const timeSplit = (data) => {
   const dataArray = data.split(';');
@@ -148,3 +147,12 @@ export const setHeights = (nodes) => {
 };
 
 export const weekDayInWord = ['', '월', '화', '수', '목', '금', '토'];
+
+
+export const calTotalCredit = (courses) => {
+  return courses.entrySeq().map(([courseId, course]) => {
+    return course.credit;
+  }).reduce((credit, acc) => {
+    return acc + credit;
+  }, 0);
+};
