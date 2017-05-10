@@ -10,10 +10,6 @@ export default class ReactSelectWrapper extends Component {
     this.onFocus = this.onFocus.bind(this);
   }
 
-  componentDidMount() {
-    this.onChange(this.props.init);
-  }
-
   onChange(val) {
     if (this.props.input.onChange) {
       this.props.input.onChange(val);
@@ -44,6 +40,7 @@ export default class ReactSelectWrapper extends Component {
           onChange={this.onChange}
           onFocus={this.onBlur}
           onBlur={this.onFoucs}
+          clearable={this.props.clearable}
         />
         {errorRender && touched && ((error && <span className='error'>{error}</span>) || (warning && <span className='warning'>{warning}</span>)) }
       </div>
@@ -55,13 +52,14 @@ ReactSelectWrapper.defaultProps = {
   init: {},
   errorRender: false,
   wrapperClassName: 'form-group',
+  clearable: false,
 };
 
 ReactSelectWrapper.propTypes = {
   meta: PropTypes.object.isRequired,
   input: PropTypes.object.isRequired,
   options: PropTypes.array.isRequired,
-  init: PropTypes.object,
   errorRender: PropTypes.bool,
   wrapperClassName: PropTypes.string,
+  clearable: PropTypes.bool,
 };

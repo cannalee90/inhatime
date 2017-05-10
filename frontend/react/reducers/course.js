@@ -50,6 +50,7 @@ export default (state = initialState, actions) => {
           state.terms.filter((term) => {
             return term.id === actions.data;
           })[0].Schedules),
+        selectedCourses: Immutable.Map(),
       };
     case Action.CLEAR_ERRORS:
       return {

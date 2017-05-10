@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
+
 import PropTypes from 'prop-types';
 import {
   clearSchedule,
@@ -28,10 +29,8 @@ class TimeTable extends Component {
         title: null,
       },
     };
-    this.changeTerm = this.changeTerm.bind(this);
     this.saveSchedule = this.saveSchedule.bind(this);
     this.removeCourse = this.removeCourse.bind(this);
-    this.changeSchedule = this.changeSchedule.bind(this);
     this.addSchedule = this.addSchedule.bind(this);
     this.onFormChange = this.onFormChange.bind(this);
   }
@@ -68,10 +67,38 @@ class TimeTable extends Component {
     this.props.removeCourse(courseId);
   }
 
-  changeSchedule(schedule) {
+  initialTermId(terms, val) {
+    if (val) {
+      return val;
+    }
+    const init = _.filter(terms, (term) => {
+      return term.default;
+    })[0];
+    return {
+      label: `${init.year}/${init.semester}`,
+      value: init.id,
+    };
   }
 
-  changeTerm(termId) {
+  initialScheduleId(schedules, val, termId) {
+    if (val) {
+      const hasVal = schedules.filter((schedule) => {
+        return schedule.id === val.id;
+      }).toArray()[0];
+      if (hasVal) {
+        return val;
+      }
+    }
+    const init = schedules.filter((schedule) => {
+      return schedule.default && termId.value === schedule.TermId;
+    }).toArray()[0];
+    if (init) {
+      return {
+        label: `${init.title}`,
+        value: init.id,
+      };
+    }
+    return null;
   }
 
   render() {
@@ -83,6 +110,9 @@ class TimeTable extends Component {
       clearSchedule,
       changeSchedule,
      } = this.props;
+    if (terms.length === 1) {
+      return null;
+    }
     return (
       <div>
         <TimeTableHeader
@@ -91,6 +121,10 @@ class TimeTable extends Component {
           selectedTerm={this.state.selectedTerm}
           onFormChange={this.onFormChange}
           addSchedule={this.addSchedule}
+          initialValues={{
+            termId: this.initialTermId(terms, this.props.termId),
+            scheduleId: this.initialScheduleId(termSchedules, this.props.scheduleId, this.props.termId),
+          }}
         />
         <TimeTableBody
           selectedCourses={selectedCourses}
@@ -113,6 +147,7 @@ TimeTable.propTypes = {
   removeCourse: PropTypes.func.isRequired,
   terms: PropTypes.array.isRequired,
   termSchedules: PropTypes.object.isRequired,
+  clearSchedule: PropTypes.func.isRequired,
 };
 
 const selector = formValueSelector('TimetableHeader');

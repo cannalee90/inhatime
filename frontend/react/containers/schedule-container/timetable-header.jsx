@@ -42,6 +42,7 @@ class TimetableHeader extends Component {
       return {
         label: schedule.title,
         value: schedule.id,
+        termId: schedule.TermId,
       };
     }).toArray();
   }
@@ -56,11 +57,13 @@ class TimetableHeader extends Component {
             name='termId'
             component={ReactSelect}
             options={termOptions}
+            clearable={false}
           />
           <Field
             name='scheduleId'
             component={ReactSelect}
             options={scheduleOptions}
+            clearable={false}
           />
           <AddScheduleBtn
             onClick={() => { this.toggleModal('addScheduleModal'); }}
@@ -88,13 +91,14 @@ TimetableHeader.propTypes = {
   addSchedule: PropTypes.func.isRequired,
   onFormChange: PropTypes.func.isRequired,
   terms: PropTypes.array.isRequired,
-  schedules: PropTypes.array.isRequired,
+  schedules: PropTypes.object.isRequired,
   selectedTerm: PropTypes.number,
   selectedSchedule: PropTypes.number,
 };
 
 TimetableHeader = reduxForm({
   form: 'TimetableHeader',
+  enableReinitialize: true,
 })(TimetableHeader);
 
 

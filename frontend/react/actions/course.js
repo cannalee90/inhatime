@@ -92,10 +92,11 @@ export const removeCourse = (courseId) => {
 
 export const fetchSchedules = (termId) => {
   return (dispatch) => {
-    return dispatch({
+    dispatch({
       type: FETCH_SCHEDULES,
       data: termId,
     });
+    return Promise.resolve();
   };
 };
 
