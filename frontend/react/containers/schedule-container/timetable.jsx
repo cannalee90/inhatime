@@ -40,6 +40,9 @@ class TimeTable extends Component {
   }
 
   componentWillReceiveProps(nextProps, nextState) {
+    if (nextProps.session.isAuth !== this.props.session.isAuth) {
+      this.props.fetchTerms();
+    }
     if (this.props.termId !== nextProps.termId && nextProps.termId) {
       this.props.fetchSchedules(nextProps.termId.value);
     }
@@ -159,6 +162,7 @@ const mapStateToProps = (state) => {
     termSchedules: state.course.termSchedules,
     termId: selector(state, 'termId'),
     scheduleId: selector(state, 'scheduleId'),
+    session: state.session,
   };
 };
 

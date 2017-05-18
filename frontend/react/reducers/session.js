@@ -9,19 +9,27 @@ const initialState = {
   },
   errors: [],
   infos: [],
+  isFetching: false,
 };
 
 export default (state = initialState, actions) => {
   switch (actions.type) {
     case Action.SET_CURRENT_USER:
       return {
+        isFetching: false,
         isAuth: true,
         currentUser: actions.data.user,
         errors: [],
       };
+    case Action.SET_FETCHING:
+      return {
+        ...state,
+        isFetching: true,
+      };
     case Action.SESSION_ERROR:
       return {
         ...state,
+        isFetching: false,
         errors: actions.errors,
       };
     case Action.DEL_CURRENT_USER:

@@ -9,6 +9,14 @@ export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const CLEAR_INFOS = 'CLEAR_INFOS';
 export const SESSION_INFO = 'SESSION_INFO';
 
+export const SET_FETCHING = 'SET_FETCHING';
+
+export const setFetching = () => {
+  return {
+    type: SET_FETCHING,
+  };
+};
+
 const parseErrors = (errors) => {
   if (errors.response) {
     return errors.response.data.errors;
@@ -63,6 +71,7 @@ export const clearInfos = () => {
 
 export const getCurrentUser = () => {
   return (dispatch) => {
+    dispatch(setFetching());
     return httpGet('/auth')
     .then((data) => {
       dispatch(setCurrentUser(data));

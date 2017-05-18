@@ -21,6 +21,9 @@ export default function (ComposedComponent) {
     }
 
     render() {
+      if (this.props.session.isFetching) {
+        return null;
+      }
       return (<ComposedComponent
         {...this.props}
       />);
