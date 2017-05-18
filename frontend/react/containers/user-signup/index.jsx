@@ -26,7 +26,7 @@ class UserSignin extends Component {
     return (
       <div className='container content'>
         <div className='row'>
-          <div className='col-md-4 col-md-offset-4 col-sm-3 col-sm-offset-3'>
+          <div className='col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3'>
             <ErrorRender
               messages={errors}
             />

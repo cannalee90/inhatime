@@ -61,6 +61,18 @@ export const clearInfos = () => {
   };
 };
 
+export const getCurrentUser = () => {
+  return (dispatch) => {
+    return httpGet('/auth')
+    .then((data) => {
+      dispatch(setCurrentUser(data));
+    })
+    .catch((errors) => {
+      return dispatch(sessionError(errors));
+    });
+  };
+};
+
 export const userSignin = (values) => {
   return (dispatch) => {
     return httpPost('/auth', values)
