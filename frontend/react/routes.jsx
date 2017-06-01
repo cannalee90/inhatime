@@ -5,8 +5,10 @@ import { Route, IndexRoute } from 'react-router';
 import App from './containers/app';
 
 import ScheduleContainer from './containers/schedule-container';
+import LectureScore from './containers/lecture-score';
 
 import SetDefaultProps from './hoc/set-default-props';
+
 
 import UserSignin from './containers/user-signin';
 import UserSignup from './containers/user-signup';
@@ -22,5 +24,6 @@ export default (
       <Route path='password' component={UserPasswordFind} />
       <Route path='password/:hash' component={UserPasswordReset} />
     </Route>
+    <Route path='score' component={LectureScore} />
   </Route>
 );

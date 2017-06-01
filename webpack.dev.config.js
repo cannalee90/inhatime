@@ -66,6 +66,7 @@ module.exports = {
           /font-awesome\.css$/,
           /bootstrap\.css$/,
           /react-select.css$/,
+          /font-awesome.min.css$/,
         ],
         use: [
           {
@@ -92,7 +93,7 @@ module.exports = {
           /font-awesome\.css$/,
           /bootstrap\.css$/,
           /react-select.css$/,
-
+          /font-awesome.min.css$/,
         ],
         use: [
           {
