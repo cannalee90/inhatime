@@ -16,6 +16,7 @@ const initialState = {
   ],
   schedules: Immutable.List(),
   termSchedules: Immutable.List(),
+  recommendable: [],
 };
 
 
@@ -71,6 +72,11 @@ export default (state = initialState, actions) => {
       return {
         ...state,
         selectedCourses: state.selectedCourses.delete(actions.data),
+      };
+    case Action.FETCH_RECOMMENDABLE:
+      return {
+        ...state,
+        recommendable: actions.data.courses,
       };
     default:
       return state;

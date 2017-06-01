@@ -18,16 +18,16 @@ export default class CourseWrapper extends Component {
   render() {
     const { rating } = this.state;
     const { name } = this.props;
+    const { title, instructor, credit } = this.props.course;
     return (
       <div className='col-xs-12 col-sm-4 col-md-3 course-outter-wrapper'>
         <div className='box-padding course-wrapper'>
           <div className='course-info-wrapper'>
             <div className='course-name'>
-              <h4>오퍼레이팅시스템</h4>
+              <h4>{title}</h4>
             </div>
             <div className='course-info'>
-              <h5>이문규 교수님 / 3학점</h5>
-
+              <h5>{instructor} 교수님 / {credit}학점</h5>
             </div>
           </div>
           <div className='course-stars'>

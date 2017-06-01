@@ -10,6 +10,7 @@ export const FETCH_TERMS = 'FETCH_TERMS';
 export const FETCH_SCHEDULES = 'FETCH_SCHEDULES';
 export const CHANGE_SCHEDULE = 'CHANGE_SCHEDULE';
 export const SAVE_SCHEDULE = 'SAVE_SCHEDULE';
+export const FETCH_RECOMMENDABLE = 'FETCH_RECOMMENDABLE';
 
 export const clearErrors = () => {
   return {
@@ -69,9 +70,21 @@ export const saveSchedule = (data) => {
     return dispatch({
       type: SAVE_SCHEDULE,
       data,
-    })
-  }
-}
+    });
+  };
+};
+
+export const fetchRecommendable = () => {
+  return (dispatch) => {
+    return httpGet('/recommendable')
+    .then((data) => {
+      return dispatch({
+        type: FETCH_RECOMMENDABLE,
+        data,
+      });
+    });
+  };
+};
 
 export const clearSchedule = () => {
   return (dispatch) => {
