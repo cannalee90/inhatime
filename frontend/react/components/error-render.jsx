@@ -35,7 +35,7 @@ export default class ErrorRender extends Component {
 
 ErrorRender.defaultProps = {
   type: 'danger',
-}
+};
 
 ErrorRender.propTypes = {
   messages: PropTypes.array.isRequired,

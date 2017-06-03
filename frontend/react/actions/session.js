@@ -1,5 +1,6 @@
-import { httpGet, httpPost, httpPut } from './../utils/request';
 import { push } from 'react-router-redux';
+import { httpGet, httpPost, httpPut } from './../utils/request';
+import { actionErrors } from './app';
 
 export const USER_SIGNIN = 'USER_SIGNIN';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
@@ -77,7 +78,7 @@ export const getCurrentUser = () => {
       dispatch(setCurrentUser(data));
     })
     .catch((errors) => {
-      return dispatch(sessionError(errors));
+      return dispatch(actionErrors(errors, SESSION_ERROR));
     });
   };
 };
@@ -93,7 +94,7 @@ export const userSignin = (values) => {
       dispatch(push('/'));
     })
     .catch((errors) => {
-      return dispatch(sessionError(errors));
+      return dispatch(actionErrors(errors, SESSION_ERROR));
     });
   };
 };
@@ -106,7 +107,7 @@ export const userSignup = (values) => {
       dispatch(userSignin({ password, email }));
     })
     .catch((errors) => {
-      return dispatch(sessionError(errors));
+      return dispatch(actionErrors(errors, SESSION_ERROR));
     });
   };
 };
@@ -123,7 +124,7 @@ export const passwordReset = (values) => {
       }));
     })
     .catch((errors) => {
-      return dispatch(sessionError(errors));
+      return dispatch(actionErrors(errors, SESSION_ERROR));
     });
   };
 };
@@ -138,10 +139,8 @@ export const passwordConfirm = (hash) => {
     .catch((errors) => {
       dispatch(push({
         pathname: '/user/password',
-        state: {
-          errors: parseErrors(errors),
-        }
       }));
+      dispatch(actionErrors(errors, SESSION_ERROR));
     });
   };
 };
@@ -158,7 +157,7 @@ export const passwordChange = (values) => {
       }));
     })
     .catch((errors) => {
-      dispatch(sessionError(errors));
+      dispatch(actionErrors(errors, SESSION_ERROR));
     });
   };
 };

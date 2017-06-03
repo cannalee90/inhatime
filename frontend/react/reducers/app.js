@@ -1,4 +1,5 @@
 import * as App from 'Actions/app';
+import * as Session from 'Actions/session';
 
 const initialState = {
   errors: [],
@@ -12,6 +13,11 @@ export default (state = initialState, actions) => {
       return {
         ...state,
         departments: actions.data.departments,
+      };
+    case Session.SESSION_ERROR:
+      return {
+        ...state,
+        errors: actions.errors,
       };
     default:
       return state;

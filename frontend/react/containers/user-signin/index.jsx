@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import AppAlert from 'Components/app-alert';
 
 import UserSigninForm from './user-signin-form';
 import { userSignin, clearErrors } from './../../actions/session';
 import LinkTo from './../../common/link-to';
-import RenderAlerts from './../../components/error-render';
-import { concatErrors, concatInfos } from './../../utils/helper';
 
 class UserSignin extends Component {
   constructor(props) {
@@ -25,18 +24,12 @@ class UserSignin extends Component {
 
   render() {
     const { session, location } = this.props;
-    const errorMessages = concatErrors(session, location.state);
-    const infoMessages = concatInfos(session, location.state);
     return (
       <div className='container content'>
         <div className='row'>
           <div className='col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3'>
-            <RenderAlerts
-              messages={errorMessages}
-            />
-            <RenderAlerts
-              messages={infoMessages}
-              type='success'
+            <AppAlert
+              state={this.props.app}
             />
             <UserSigninForm
               onSubmit={this.onSubmit}
@@ -63,9 +56,10 @@ class UserSignin extends Component {
   }
 }
 
-const mapStateToProps = ({ session }) => {
+const mapStateToProps = ({ session, app }) => {
   return {
     session,
+    app,
   };
 };
 
