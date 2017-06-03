@@ -11,7 +11,6 @@ const AppAlert = (props) => {
   infos = infos || state.infos;
   errors = _.uniq(errors);
   infos = _.uniq(infos);
-  console.log(props);
   return (
     <div>
       <AlertRender
