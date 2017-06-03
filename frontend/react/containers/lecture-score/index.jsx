@@ -20,9 +20,6 @@ class LectureScore extends Component {
 
   onSubmit(score, recommendableId) {
     this.props.postCourseScore({ id: recommendableId, score })
-    .then(() => {
-      this.props.removeCourse(recommendableId);
-    });
   }
 
   render() {

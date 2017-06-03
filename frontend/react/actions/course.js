@@ -133,12 +133,12 @@ export const searchCourses = (values) => {
 
 export const postCourseScore = (values) => {
   return (dispatch) => {
-    httpPost('/recommendable', values)
+    return httpPost('/recommendable', values)
     .then((data) => {
       return dispatch({
         type: POST_COURSE_SCORE,
         data,
-      })
+      });
     })
     .catch((errors) => {
       return dispatch({
@@ -147,4 +147,4 @@ export const postCourseScore = (values) => {
       });
     });
   };
-}
+};
