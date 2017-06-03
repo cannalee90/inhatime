@@ -35,23 +35,9 @@ export default (state = initialState, actions) => {
     case Action.DEL_CURRENT_USER:
       return {
         isAuth: false,
+        isFetching: false,
         currentUser: initialState.currentUser,
         errors: [],
-      };
-    case Action.SESSION_INFO:
-      return {
-        ...state,
-        infos: actions.infos,
-      };
-    case Action.CLEAR_ERRORS:
-      return {
-        ...state,
-        errors: [],
-      };
-    case Action.CLEAR_INFOS:
-      return {
-        ...state,
-        infos: [],
       };
     default:
       return state;

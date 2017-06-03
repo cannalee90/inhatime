@@ -8,7 +8,7 @@ import ScheduleContainer from './containers/schedule-container';
 import LectureScore from './containers/lecture-score';
 
 import SetDefaultProps from './hoc/set-default-props';
-
+import RequireUser from './hoc/require-user';
 
 import UserSignin from './containers/user-signin';
 import UserSignup from './containers/user-signup';
@@ -34,7 +34,7 @@ export default (
     <Route path='user'>
       <Route path='signup' component={UserSignup} />
     </Route>
-    <Route path='schedule' component={ScheduleContainer} />
-    <Route path='score' component={LectureScore} />
+    <Route path='schedule' component={RequireUser(ScheduleContainer)} />
+    <Route path='score' component={RequireUser(LectureScore)} />
   </Route>
 );

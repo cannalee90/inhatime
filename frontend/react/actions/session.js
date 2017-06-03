@@ -83,14 +83,16 @@ export const getCurrentUser = () => {
   };
 };
 
-export const userSignin = (values) => {
+export const userSignin = (values, next = '/schedule') => {
   return (dispatch) => {
+    dispatch(setFetching());
     return httpPost('/auth', values)
     .then((data) => {
       if (data.token) {
         localStorage.setItem('inhatimeAuthToken', data.token);
       }
-      return dispatch(setCurrentUser(data));
+      dispatch(setCurrentUser(data));
+      dispatch(push(next));
     })
     .catch((errors) => {
       return dispatch(actionErrors(errors, SESSION_ERROR));

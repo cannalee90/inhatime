@@ -21,6 +21,7 @@ export const parseJSON = (res) => {
 
 export const httpPost = (url, data) => {
   const body = data;
+  axios.defaults.headers.common.Authorization = localStorage.getItem('inhatimeAuthToken') ? `Bearer ${localStorage.getItem('inhatimeAuthToken')}` : null;
   return axios.post(url, body)
     .then(checkStatus)
     .then(parseJSON);
@@ -29,6 +30,7 @@ export const httpPost = (url, data) => {
 
 export const httpPut = (url, data) => {
   const body = data;
+  axios.defaults.headers.common.Authorization = localStorage.getItem('inhatimeAuthToken') ? `Bearer ${localStorage.getItem('inhatimeAuthToken')}` : null;
   return axios.put(url, body)
     .then(checkStatus)
     .then(parseJSON);
@@ -36,6 +38,7 @@ export const httpPut = (url, data) => {
 
 
 export const httpGet = (url, params) => {
+  axios.defaults.headers.common.Authorization = localStorage.getItem('inhatimeAuthToken') ? `Bearer ${localStorage.getItem('inhatimeAuthToken')}` : null;
   return axios.get(url)
     .then(checkStatus)
     .then(parseJSON);

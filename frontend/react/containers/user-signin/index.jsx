@@ -21,7 +21,8 @@ class UserSignin extends Component {
   }
 
   onSubmit(values) {
-    this.props.userSignin(values);
+    const next = this.props.location.query.next;
+    this.props.userSignin(values, next);
   }
 
   render() {

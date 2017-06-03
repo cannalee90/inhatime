@@ -62,13 +62,13 @@ class Nav extends Component {
               }
               {isAuth &&
                 <li>
-                  <a href='#' onClick={() => this.props.userSignout()}>로그아웃</a>
+                  <a style={{ cursor: 'pointer' }} onClick={() => this.props.userSignout()}>로그아웃</a>
                 </li>
               }
               {!isAuth &&
                 <li>
                   <LinkTo
-                    to='/user/signin'
+                    to='/'
                     message='로그인'
                   />
                 </li>

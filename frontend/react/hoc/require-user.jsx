@@ -9,27 +9,22 @@ import { bindActionCreators } from 'redux';
 import { getCurrentUser } from './../actions/session';
 
 export default function (ComposedComponent) {
-  class SetDefaultProps extends Component {
+  class RequireUser extends Component {
     // constructor(props) {
     //   super(props);
     // }
 
     componentWillMount() {
       const { isAuth } = this.props.session;
-      const token = localStorage.getItem('inhatimeAuthToken');
       const { pathname } = this.props.location;
-      if (!isAuth && token) {
-        this.props.getCurrentUser()
-        .then(() => {
-          if (pathname === '/') {
-            this.props.replace('/schedule');
-          }
-        });
+      const next = urlencode(pathname);
+      if (!isAuth && !localStorage.getItem('inhatimeAuthToken')) {
+        this.props.replace(`/?next=${next}`);
       }
     }
 
     render() {
-      if (this.props.session.isFetching) {
+      if (!this.props.session.isAuth) {
         return null;
       }
 
@@ -50,12 +45,11 @@ export default function (ComposedComponent) {
     return bindActionCreators({ getCurrentUser, replace }, dispatch);
   };
 
-  SetDefaultProps.propTypes = {
+  RequireUser.propTypes = {
     session: PropTypes.object.isRequired,
-    getCurrentUser: PropTypes.func.isRequired,
     replace: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
   };
 
-  return connect(mapStateToProps, mapDispatchToProps)(SetDefaultProps);
+  return connect(mapStateToProps, mapDispatchToProps)(RequireUser);
 }
