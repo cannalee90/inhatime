@@ -18,11 +18,23 @@ class UserSignin extends Component {
   }
 
   onSubmit(values) {
-    this.props.userSignup(values);
+    const { email, password, department } = values
+    this.props.userSignup({ email, password, MajorId: department.value });
+  }
+
+  renderDepartment(departments) {
+    return _.map(departments, (department) => {
+      const { title, id } = department;
+      return {
+        label: title,
+        value: id,
+      };
+    });
   }
 
   render() {
-    const { errors } = this.props.session;
+    // const { errors } = this.props.session;
+    const { errors, infos, departments } = this.props.app;
     return (
       <div className='container content'>
         <div className='row'>
@@ -33,6 +45,7 @@ class UserSignin extends Component {
             <UserSignupForm
               onSubmit={this.onSubmit}
               errorRender={false}
+              departments={this.renderDepartment(departments)}
             />
           </div>
         </div>
@@ -41,9 +54,10 @@ class UserSignin extends Component {
   }
 }
 
-const mapStateToProps = ({ session }) => {
+const mapStateToProps = ({ session, app }) => {
   return {
     session,
+    app,
   };
 };
 

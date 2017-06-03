@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchInitialData } from 'Actions/app';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'react-select/dist/react-select.css';
@@ -17,11 +18,14 @@ class App extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.fetchInitialData();
+  }
+
   render() {
     return (
       <div>
-        <Nav
-        />
+        <Nav />
         <div style={{ paddingTop: '50px' }}>
           {this.props.children}
         </div>
@@ -31,14 +35,14 @@ class App extends Component {
   }
 }
 //
-// const mapStateToProps = ({ session }) => {
-//   return {
-//     session,
-//   };
-// };
+const mapStateToProps = ({ session }) => {
+  return {
+    session,
+  };
+};
 
-// const mapDispatchToProps = (dispatch) => {
-//   return bindActionCreators({}, dispatch);
-// };
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ fetchInitialData }, dispatch);
+};
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

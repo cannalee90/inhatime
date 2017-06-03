@@ -1,11 +1,12 @@
 import { httpPost, httpGet } from './../utils/request';
+import { actionErrors } from './app';
 
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const COURSE_ERRORS = 'COURSE_ERRORS';
 export const FETCH_COURSES = 'FETCH_COURSES';
 export const SELECT_COURSE = 'SELECT_COURSE';
 export const CLEAR_SCHEDULE = 'CLEAR_SCHEDULE';
-export const REMOVE_COURSE = 'REMOVE_COURSE';
+// export const REMOVE_COURSE = 'REMOVE_COURSE';
 export const FETCH_TERMS = 'FETCH_TERMS';
 export const FETCH_SCHEDULES = 'FETCH_SCHEDULES';
 export const CHANGE_SCHEDULE = 'CHANGE_SCHEDULE';
@@ -94,14 +95,14 @@ export const clearSchedule = () => {
   };
 };
 
-export const removeCourse = (courseId) => {
-  return (dispatch) => {
-    return dispatch({
-      type: REMOVE_COURSE,
-      data: courseId,
-    });
-  };
-};
+// export const removeCourse = (courseId) => {
+//   return (dispatch) => {
+//     return dispatch({
+//       type: REMOVE_COURSE,
+//       data: courseId,
+//     });
+//   };
+// };
 
 export const fetchSchedules = (termId) => {
   return (dispatch) => {

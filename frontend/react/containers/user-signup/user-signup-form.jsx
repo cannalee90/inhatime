@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import _ from 'lodash';
 
 import Btn from './../../common/btn';
 import { renderField } from './../../common/field';
@@ -11,15 +12,9 @@ class UserSigninForm extends Component {
   //   super(props);
   // }
 
+
   render() {
-    const { handleSubmit } = this.props;
-    const options = [
-      { label: '기계공학과', value: '0198005' },
-      { label: '항공우주학과', value: '1013446' },
-      { label: '컴퓨터공학과', value: '1184217' },
-      { label: '철학과', value: '0302072' },
-      { label: '정보통신공학과', value: '1185283' },
-    ];
+    const { handleSubmit, departments } = this.props;
     return (
       <div>
         <form className='redux-form' onSubmit={handleSubmit}>
@@ -52,7 +47,7 @@ class UserSigninForm extends Component {
           <Field
             name='department'
             wrapperClassName='form-group margin-bottom-10'
-            options={options}
+            options={departments}
             component={renderSelect}
           />
           <Btn
