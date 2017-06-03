@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import CourseWrapper from './course-wrapper';
-import { fetchRecommendable, postCourseScore, removeCourse } from './../../actions/course';
+import { fetchRecommendable, postCourseScore } from './../../actions/course';
 
 
 class LectureScore extends Component {
@@ -19,7 +19,7 @@ class LectureScore extends Component {
   }
 
   onSubmit(score, recommendableId) {
-    this.props.postCourseScore({ id: recommendableId, score })
+    this.props.postCourseScore({ id: recommendableId, score });
   }
 
   render() {
@@ -46,6 +46,7 @@ class LectureScore extends Component {
 LectureScore.propTypes = {
   fetchRecommendable: PropTypes.func.isRequired,
   recommendable: PropTypes.array.isRequired,
+  postCourseScore: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ session, course }) => {
@@ -56,7 +57,7 @@ const mapStateToProps = ({ session, course }) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ fetchRecommendable, postCourseScore, removeCourse }, dispatch);
+  return bindActionCreators({ fetchRecommendable, postCourseScore }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LectureScore);
