@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { replace } from 'react-router-redux';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -16,7 +17,10 @@ export default function (ComposedComponent) {
       const { isAuth } = this.props.session;
       const token = localStorage.getItem('inhatimeAuthToken');
       if (!isAuth && token) {
-        this.props.getCurrentUser();
+        this.props.getCurrentUser()
+        .then(() => {
+          this.props.replace('/');
+        });
       }
     }
 
@@ -38,12 +42,13 @@ export default function (ComposedComponent) {
   };
 
   const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ getCurrentUser }, dispatch);
+    return bindActionCreators({ getCurrentUser, replace }, dispatch);
   };
 
   SetDefaultProps.propTypes = {
     session: PropTypes.object.isRequired,
     getCurrentUser: PropTypes.func.isRequired,
+    replace: PropTypes.func.isRequired,
   };
 
   return connect(mapStateToProps, mapDispatchToProps)(SetDefaultProps);

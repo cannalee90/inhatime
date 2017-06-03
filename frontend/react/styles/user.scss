@@ -1,0 +1,47 @@
+@import 'config';
+
+.user-signin-wrapper {
+  background: $inhatime-blue;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .form-wrapper {
+    background: #fff;
+    padding: 30px;
+  }
+
+  @media (max-width:780px) {
+    .form-wrapper {
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 781px) {
+    .form-wrapper {
+      width: 400px;
+    }
+  }
+
+
+  .header {
+    margin-top: 0;
+    font-weight: 200;
+    margin-bottom: 20px;
+  }
+
+  .btn-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .signin-btn {
+    margin-right: 5px;
+  }
+
+  .forget-password {
+    margin-right: auto;
+  }
+}

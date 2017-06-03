@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import Btn from './../../common/btn';
 import { renderField } from './../../common/field';
 import validate from './validator';
+import LinkTo from './../../common/link-to';
 
 class UserSigninForm extends Component {
   // constructor(props) {
@@ -31,11 +32,24 @@ class UserSigninForm extends Component {
             component={renderField}
             errorRender={false}
           />
-          <Btn
-            className='btn btn-primary form-control'
-            value='로그인'
-            type='submit'
-          />
+          <div className='btn-wrapper'>
+            <LinkTo
+              className='forget-password'
+              message='비밀번호 찾기'
+              to='/user/password'
+            />
+            <LinkTo
+              className='btn btn-reverse signin-btn'
+              message='회원가입'
+              to='/user/signup'
+            />
+            <Btn
+              className='btn btn-inhatime'
+              value='로그인'
+              type='submit'
+            />
+
+          </div>
         </form>
       </div>
     );

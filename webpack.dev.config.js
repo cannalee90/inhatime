@@ -59,37 +59,36 @@ module.exports = {
           },
         ],
       },
-      {
-        test: /\.css$/,
-        exclude: [
-          /style\.css$/,
-          /font-awesome\.css$/,
-          /bootstrap\.css$/,
-          /react-select.css$/,
-          /font-awesome.min.css$/,
-        ],
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]',
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins() {
-                return [
-                  autoprefixer({ browsers: ['last 2 versions'] }),
-                ];
-              },
-            },
-          },
-        ],
-      },
+      // {
+      //   test: /\.css$/,
+      //   exclude: [
+      //     /style\.css$/,
+      //     /font-awesome\.css$/,
+      //     /bootstrap\.css$/,
+      //     /react-select.css$/,
+      //     /font-awesome.min.css$/,
+      //   ],
+      //   use: [
+      //     {
+      //       loader: 'style-loader',
+      //     },
+      //     {
+      //       loader: 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]',
+      //     },
+      //     {
+      //       loader: 'postcss-loader',
+      //       options: {
+      //         plugins() {
+      //           return [
+      //             autoprefixer({ browsers: ['last 2 versions'] }),
+      //           ];
+      //         },
+      //       },
+      //     },
+      //   ],
+      // },
       {
         test: [
-          /style\.css$/,
           /font-awesome\.css$/,
           /bootstrap\.css$/,
           /react-select.css$/,
@@ -114,7 +113,6 @@ module.exports = {
           },
         ],
       },
-
       {
         test: /\.scss$/,
         use: [

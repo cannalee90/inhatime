@@ -9,8 +9,9 @@ import 'font-awesome/css/font-awesome.min.css';
 
 import Nav from './../components/nav';
 import Footer from './../components/footer';
-import './../styles/style.css';
+import './../styles/style.scss';
 import './../styles/custom.scss';
+// import './../styles/user.scss';
 
 
 class App extends Component {
@@ -26,7 +27,7 @@ class App extends Component {
     return (
       <div>
         <Nav />
-        <div style={{ paddingTop: '50px' }}>
+        <div className='body-wrapper'>
           {this.props.children}
         </div>
         <Footer />

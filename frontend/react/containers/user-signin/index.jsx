@@ -25,31 +25,16 @@ class UserSignin extends Component {
   render() {
     const { session, location } = this.props;
     return (
-      <div className='container content'>
-        <div className='row'>
-          <div className='col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3'>
-            <AppAlert
-              state={this.props.app}
-            />
-            <UserSigninForm
-              onSubmit={this.onSubmit}
-              errorRender={false}
-            />
-            <ul className='list-unstyled list-inline text-center'>
-              <li>
-                <LinkTo
-                  message='비밀번호 찾기'
-                  to='/user/password'
-                />
-              </li>
-              <li>
-                <LinkTo
-                  message='회원가입'
-                  to='/user/signup'
-                />
-              </li>
-            </ul>
-          </div>
+      <div className='container-fluid user-signin-wrapper'>
+        <div className='form-wrapper'>
+          <h3 className='header'>로그인</h3>
+          <AppAlert
+            state={this.props.app}
+          />
+          <UserSigninForm
+            onSubmit={this.onSubmit}
+            errorRender={false}
+          />
         </div>
       </div>
     );
