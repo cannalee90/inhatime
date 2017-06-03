@@ -2,23 +2,18 @@ import React, { Component } from 'react';
 import StarRatingComponent from 'react-star-rating-component';
 import PropTypes from 'prop-types';
 
-export default class CourseWrapper extends Component {
+class CourseWrapper extends Component {
   constructor(props) {
     super(props);
     this.state = {
       rating: 0,
     };
-    this.onStarClick = this.onStarClick.bind(this);
-  }
-
-  onStarClick(nextValue, prevValue, name) {
-    console.log(nextValue, prevValue, name);
   }
 
   render() {
     const { rating } = this.state;
-    const { name } = this.props;
-    const { title, instructor, credit } = this.props.course;
+    const { name, arrayIdx } = this.props;
+    const { title, instructor, credit, id } = this.props.course;
     return (
       <div className='col-xs-12 col-sm-4 col-md-3 course-outter-wrapper'>
         <div className='box-padding course-wrapper'>
@@ -35,7 +30,7 @@ export default class CourseWrapper extends Component {
               name={name}
               starCount={5}
               value={rating}
-              onStarClick={this.onStarClick}
+              onStarClick={(nextValue, prevValue, componentName) => this.props.onSubmit(nextValue, id)}
               renderStarIcon={(index, value) => {
                 return <span className={index <= value ? 'fa fa-star' : 'fa fa-star-o'} />;
               }}
@@ -49,4 +44,8 @@ export default class CourseWrapper extends Component {
 
 CourseWrapper.propTypes = {
   name: PropTypes.string.isRequired,
+  course: PropTypes.object.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
+
+export default CourseWrapper;

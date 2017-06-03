@@ -11,6 +11,7 @@ export const FETCH_SCHEDULES = 'FETCH_SCHEDULES';
 export const CHANGE_SCHEDULE = 'CHANGE_SCHEDULE';
 export const SAVE_SCHEDULE = 'SAVE_SCHEDULE';
 export const FETCH_RECOMMENDABLE = 'FETCH_RECOMMENDABLE';
+export const POST_COURSE_SCORE = 'POST_COURSE_SCORE';
 
 export const clearErrors = () => {
   return {
@@ -22,7 +23,6 @@ const parseErrors = (errors) => {
   if (errors.response) {
     return errors.response.data.errors;
   }
-  console.log(errors);
   return ['App.layout.event.UnexpectedErrors'];
 };
 
@@ -130,3 +130,21 @@ export const searchCourses = (values) => {
     });
   };
 };
+
+export const postCourseScore = (values) => {
+  return (dispatch) => {
+    httpPost('/recommendable', values)
+    .then((data) => {
+      return dispatch({
+        type: POST_COURSE_SCORE,
+        data,
+      })
+    })
+    .catch((errors) => {
+      return dispatch({
+        type: COURSE_ERRORS,
+        errors: parseErrors(errors),
+      });
+    });
+  };
+}
