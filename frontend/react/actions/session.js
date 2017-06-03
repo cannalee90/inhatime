@@ -90,8 +90,7 @@ export const userSignin = (values) => {
       if (data.token) {
         localStorage.setItem('inhatimeAuthToken', data.token);
       }
-      dispatch(setCurrentUser(data));
-      dispatch(push('/'));
+      return dispatch(setCurrentUser(data));
     })
     .catch((errors) => {
       return dispatch(actionErrors(errors, SESSION_ERROR));

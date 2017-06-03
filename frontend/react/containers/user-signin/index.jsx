@@ -15,9 +15,9 @@ class UserSignin extends Component {
   }
 
   componentWillMount() {
-    if (this.props.session.isAuth) {
-      this.props.replace('/schedule');
-    }
+    // if (this.props.session.isAuth) {
+    //   this.props.replace('/schedule');
+    // }
   }
 
   onSubmit(values) {

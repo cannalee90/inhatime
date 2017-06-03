@@ -19,7 +19,7 @@ export default function (ComposedComponent) {
       if (!isAuth && token) {
         this.props.getCurrentUser()
         .then(() => {
-          this.props.replace('/');
+          this.props.replace('/schedule');
         });
       }
     }

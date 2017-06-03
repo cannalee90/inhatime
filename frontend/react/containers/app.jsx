@@ -26,7 +26,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Nav />
+        <Nav
+          pathname={this.props.pathname}
+        />
         <div className='body-wrapper'>
           {this.props.children}
         </div>
@@ -36,8 +38,9 @@ class App extends Component {
   }
 }
 //
-const mapStateToProps = ({ session }) => {
+const mapStateToProps = ({ session }, props) => {
   return {
+    pathname: props.location.pathname,
     session,
   };
 };

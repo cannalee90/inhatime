@@ -7,9 +7,21 @@ import { userSignout } from './../actions/session';
 import LinkTo from './../common/link-to';
 
 class Nav extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+    this.navbar = null;
+  }
+
+  componentWillReceiveProps(nextProps, nextState) {
+    if (nextProps.pathname !== this.props.pathname && this.collapseIn()) {
+      this.navbar.classList.remove('in');
+    }
+  }
+
+  collapseIn() {
+    return this.navbar.classList.contains('in');
+  }
+
 
   render() {
     const { currentUser, isAuth } = this.props.session;
@@ -29,7 +41,7 @@ class Nav extends Component {
               message='time table'
             />
           </div>
-          <div id='navbar' className='navbar-collapse collapse'>
+          <div ref={(ref) => { this.navbar = ref; }} id='navbar' className='navbar-collapse collapse'>
             <ul className='nav navbar-nav navbar-right'>
               <li>
                 <LinkTo
@@ -82,6 +94,7 @@ const mapDispatchToProps = (dispatch) => {
 Nav.propTypes = {
   userSignout: PropTypes.func.isRequired,
   session: PropTypes.object.isRequired,
+  pathname: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Nav);
