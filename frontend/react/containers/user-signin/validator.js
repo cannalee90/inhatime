@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default (values) => {
   const { email, password } = values;
   const errors = {};

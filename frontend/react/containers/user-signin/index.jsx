@@ -6,7 +6,6 @@ import AppAlert from 'Components/app-alert';
 
 import UserSigninForm from './user-signin-form';
 import { userSignin, clearErrors } from './../../actions/session';
-import LinkTo from './../../common/link-to';
 
 class UserSignin extends Component {
   constructor(props) {
@@ -23,13 +22,13 @@ class UserSignin extends Component {
   }
 
   render() {
-    const { session, location } = this.props;
+    const { app } = this.props;
     return (
-      <div className='container-fluid user-signin-wrapper'>
+      <div className='container-fluid user-page-wrapper'>
         <div className='form-wrapper'>
           <h3 className='header'>로그인</h3>
           <AppAlert
-            state={this.props.app}
+            state={app}
           />
           <UserSigninForm
             onSubmit={this.onSubmit}
@@ -53,8 +52,11 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 UserSignin.propTypes = {
+  // session: PropTypes.object.isRequired,
+  // location: PropTypes.object.isRequired,
   userSignin: PropTypes.func.isRequired,
   clearErrors: PropTypes.func.isRequired,
+  app: PropTypes.object.isRequired,
 };
 
 

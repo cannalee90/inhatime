@@ -9,13 +9,18 @@
 
 .row { margin:0; }
 
+
 textarea:focus, input:focus{
   outline: none;
 }
 
 body {
   font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';
-  /*overflow-y: hidden;*/
+  font-weight: 200;
+}
+
+h1, h2, h3, h4, h5, h6, .btn {
+  font-weight: 200;
 }
 
 a,
