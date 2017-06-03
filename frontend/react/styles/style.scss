@@ -609,7 +609,11 @@ a:activated {
 }
 
 .body-wrapper {
-  height: calc(100vh - 53px);
+  min-height: calc(100vh - 53px);
+}
+
+.user-page {
+
 }
 
 .footer {

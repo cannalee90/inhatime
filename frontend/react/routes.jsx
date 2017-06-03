@@ -5,7 +5,7 @@ import { Route, IndexRoute } from 'react-router';
 import App from './containers/app';
 
 import ScheduleContainer from './containers/schedule-container';
-// import LectureScore from './containers/lecture-score';
+import LectureScore from './containers/lecture-score';
 
 import SetDefaultProps from './hoc/set-default-props';
 
@@ -35,5 +35,6 @@ export default (
       <Route path='signup' component={UserSignup} />
     </Route>
     <Route path='schedule' component={ScheduleContainer} />
+    <Route path='score' component={LectureScore} />
   </Route>
 );

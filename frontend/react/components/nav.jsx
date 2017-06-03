@@ -37,7 +37,7 @@ class Nav extends Component {
             </button>
             <LinkTo
               className='navbar-brand'
-              to='/'
+              to='/schedule'
               message='time table'
             />
           </div>
