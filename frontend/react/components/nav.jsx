@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 
 import { userSignout } from './../actions/session';
 import LinkTo from './../common/link-to';
 
-
 class Nav extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
     const { currentUser, isAuth } = this.props.session;
@@ -32,10 +32,16 @@ class Nav extends Component {
           <div id='navbar' className='navbar-collapse collapse'>
             <ul className='nav navbar-nav navbar-right'>
               <li>
-                <a href='#' className='activated'>시간표짜기</a>
+                <LinkTo
+                  to='/schedule'
+                  message={'시간표 '}
+                />
               </li>
               <li>
-                <a href='#'>강의평가하기</a>
+                <LinkTo
+                  to='/score'
+                  message={'강의평가'}
+                />
               </li>
               {isAuth &&
                 <li>
@@ -61,16 +67,21 @@ class Nav extends Component {
       </nav>
     );
   }
-};
+}
 
 const mapStateToProps = ({ session }) => {
   return {
     session,
   };
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ userSignout }, dispatch);
-}
+};
+
+Nav.propTypes = {
+  userSignout: PropTypes.func.isRequired,
+  session: PropTypes.object.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Nav);
