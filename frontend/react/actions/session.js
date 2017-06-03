@@ -105,6 +105,7 @@ export const userSignup = (values) => {
     return httpPost('/user', values)
     .then((data) => {
       dispatch(userSignin({ password, email }));
+      dispatch(push('/schedule'));
     })
     .catch((errors) => {
       return dispatch(actionErrors(errors, SESSION_ERROR));

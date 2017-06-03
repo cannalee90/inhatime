@@ -4,14 +4,14 @@ import { Route, IndexRoute } from 'react-router';
 
 import App from './containers/app';
 
-// import ScheduleContainer from './containers/schedule-container';
+import ScheduleContainer from './containers/schedule-container';
 // import LectureScore from './containers/lecture-score';
 
 import SetDefaultProps from './hoc/set-default-props';
 
 
 import UserSignin from './containers/user-signin';
-// import UserSignup from './containers/user-signup';
+import UserSignup from './containers/user-signup';
 // import UserPasswordFind from './containers/user-password-find';
 // import UserPasswordReset from './containers/user-password-reset';
 
@@ -31,5 +31,9 @@ import UserSignin from './containers/user-signin';
 export default (
   <Route path='/' component={SetDefaultProps(App)}>
     <IndexRoute component={UserSignin} />
+    <Route path='user'>
+      <Route path='signup' component={UserSignup} />
+    </Route>
+    <Route path='schedule' component={ScheduleContainer} />
   </Route>
-)
+);

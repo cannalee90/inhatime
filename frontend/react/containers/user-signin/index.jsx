@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import { replace } from 'react-router-redux';
 import AppAlert from 'Components/app-alert';
 
 import UserSigninForm from './user-signin-form';
@@ -13,8 +14,10 @@ class UserSignin extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  componentWillUnmount() {
-    this.props.clearErrors();
+  componentWillMount() {
+    if (this.props.session.isAuth) {
+      this.props.replace('/schedule');
+    }
   }
 
   onSubmit(values) {
@@ -48,7 +51,7 @@ const mapStateToProps = ({ session, app }) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ userSignin, clearErrors }, dispatch);
+  return bindActionCreators({ userSignin, clearErrors, replace }, dispatch);
 };
 
 UserSignin.propTypes = {

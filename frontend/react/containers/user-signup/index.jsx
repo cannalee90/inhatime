@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import { replace } from 'react-router-redux';
 
 import AppAlert from 'Components/app-alert';
+import { userSignup } from 'Actions/session';
 
 import UserSignupForm from './user-signup-form';
 
@@ -14,7 +16,10 @@ class UserSignin extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  componentWillUnmount() {
+  componentWillmount() {
+    if (this.props.session.isAuth) {
+      this.props.replace('/schedule');
+    }
   }
 
   onSubmit(values) {
@@ -38,7 +43,7 @@ class UserSignin extends Component {
     return (
       <div className='container-fluid user-page-wrapper'>
         <div className='form-wrapper'>
-          <h3 className='header'>획원가입</h3>
+          <h3 className='header'>회원가입</h3>
           <AppAlert
             state={this.props.app}
           />
@@ -61,7 +66,7 @@ const mapStateToProps = ({ session, app }) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators({ userSignup, replace }, dispatch);
 };
 
 UserSignin.propTypes = {

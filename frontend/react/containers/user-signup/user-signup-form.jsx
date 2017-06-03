@@ -48,6 +48,7 @@ class UserSigninForm extends Component {
             name='department'
             wrapperClassName='form-group margin-bottom-10'
             options={departments}
+            placeholder='전공'
             component={renderSelect}
           />
           <Btn

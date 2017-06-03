@@ -30,7 +30,7 @@ export default class ReactSelectWrapper extends Component {
 
   render() {
     const { error, touched, warning, errorRender } = this.props.meta;
-    const { options, wrapperClassName } = this.props;
+    const { options, wrapperClassName, placeholder } = this.props;
     return (
       <div className={`${wrapperClassName} ${(error && touched) ? 'has-error' : null}`}>
         <Select
@@ -41,6 +41,7 @@ export default class ReactSelectWrapper extends Component {
           onFocus={this.onBlur}
           onBlur={this.onFoucs}
           clearable={this.props.clearable}
+          placeholder={placeholder}
         />
         {errorRender && touched && ((error && <span className='error'>{error}</span>) || (warning && <span className='warning'>{warning}</span>)) }
       </div>
@@ -62,4 +63,8 @@ ReactSelectWrapper.propTypes = {
   errorRender: PropTypes.bool,
   wrapperClassName: PropTypes.string,
   clearable: PropTypes.bool,
+  placeholder: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.string,
+  ]),
 };
