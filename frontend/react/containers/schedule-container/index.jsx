@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+
 import Timetable from './timetable';
+
 
 import CourseSearch from './course-search';
 
