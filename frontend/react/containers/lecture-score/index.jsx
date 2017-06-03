@@ -18,8 +18,8 @@ class LectureScore extends Component {
     this.props.fetchRecommendable();
   }
 
-  onSubmit(score, recommendableId) {
-    this.props.postCourseScore({ id: recommendableId, score });
+  onSubmit(score, distinctCode, recommendableId) {
+    this.props.postCourseScore({ id: recommendableId, distinctCode, score });
   }
 
   render() {

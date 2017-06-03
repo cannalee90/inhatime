@@ -131,6 +131,7 @@ export const searchCourses = (values) => {
   };
 };
 
+
 export const postCourseScore = (values) => {
   return (dispatch) => {
     return httpPost('/recommendable', values)
