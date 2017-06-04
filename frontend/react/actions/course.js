@@ -76,7 +76,6 @@ export const saveSchedule = (data) => {
 };
 
 export const fetchRecommendable = () => {
-  debugger;
   return (dispatch) => {
     return httpGet('/recommendable')
     .then((data) => {
